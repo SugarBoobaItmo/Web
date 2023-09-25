@@ -1,3 +1,9 @@
+function isNumber(n) {
+    // 'use strict';
+    n = n.replace(',', '.');
+    return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
 function valid() {
     var radio_buttons = document.getElementsByName("x");
     var x = 0;
@@ -12,18 +18,22 @@ function valid() {
 
     if (x == "" || y == "" || r == "") {
         alert("Please fill all fields");
-
         return false;
     }
 
-    if (isNaN(x) || isNaN(y) || isNaN(r)) {
+    if (!isNumber(x) || !isNumber(y) || !isNumber(r)) {
         document.getElementById("y").value = "";
         document.getElementById("y").style.borderColor = "red";
         document.getElementById("y").placeholder = "should be a number";
-        // alert("Please enter a valid number");
-
+        alert("Please enter a valid number");
         return false;
+    } else {
+        x = x.replace(',', '.');
+        y = y.replace(',', '.');
+        r = r.replace(',', '.');
     }
+
+
 
     if (y < -5 || y > 5) {
         document.getElementById("y").value = "";
