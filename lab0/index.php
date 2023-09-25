@@ -29,7 +29,7 @@
             width: 80%;
             max-width: 800px;
             /* background color should be transparent */
-            background-color: rgba(255, 255, 255, 0.3);            
+            background-color: rgba(255, 255, 255, 0.3);
 
 
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -145,15 +145,15 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <label for="y">Y:</label>
+                                        Y:
                                     </td>
                                     <td>
-                                        <input type="text" name="y" id="y" />
+                                        <input type="text" name="y" id="y" maxlength="8" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <label for="r">R:</label>
+                                        R:
                                     </td>
                                     <td>
                                         <select name="r" id="r">
