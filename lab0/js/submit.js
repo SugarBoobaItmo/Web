@@ -26,8 +26,8 @@ function submitForm() {
     };
 
     // Open a POST request to point_check.php
-    var time = new Date();
-    time = time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds();
+    const time = new Date().toLocaleTimeString();
+    
     
     xhr.open("GET", `point_check.php?x=${x}&y=${y}&r=${r}&time=${time}`, true);
 
