@@ -73,6 +73,7 @@
         }
 
         #button {
+            margin-left: 1%;
             padding: 5px 40px;
             background-color: rgb(164, 140, 255);
             color: white;
@@ -80,8 +81,8 @@
             cursor: pointer;
         }
 
-        input[type="button"]:hover {
-            background-color: rgb(164, 100, 255);
+        #button:hover {
+            background-color: rgb(164, 140, 255, 0.8);
         }
 
         .canvas{
