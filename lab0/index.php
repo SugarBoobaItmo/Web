@@ -39,7 +39,7 @@
         th,
         td {
             padding: 10px;
-            text-align: center;
+            text-align: left;
             border: 1px solid #dddddd;
         }
 
@@ -73,7 +73,7 @@
         }
 
         #button {
-            padding: 5px 10px;
+            padding: 5px 40px;
             background-color: rgb(164, 140, 255);
             color: white;
             border: none;
@@ -86,6 +86,12 @@
 
         .canvas{
             margin-left: 10%;
+        }
+
+        .error {
+            color: red;
+            display: inline;
+            font-size: 12px;
         }
     </style>
 </head>
@@ -168,8 +174,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2">
+                                    <td colspan="2" id="post_cell">
                                         <input type="button" value="Post" id="button" onclick="valid()">
+                                        <p class="error" id="error"> </p>
                                     </td>
                                 </tr>
                             </tbody>

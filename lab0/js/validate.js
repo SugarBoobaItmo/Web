@@ -17,7 +17,14 @@ function valid() {
     var r = document.getElementById("r").value;
 
     if (x == "" || y == "" || r == "") {
-        alert("Please fill all fields");
+        
+        var error = document.getElementById("error");
+        error.innerHTML = "Please fill all fields";
+
+        setTimeout(function () {
+            error.innerHTML = " ";
+        }, 3000);
+        
         return false;
     }
 
@@ -25,7 +32,7 @@ function valid() {
         document.getElementById("y").value = "";
         document.getElementById("y").style.borderColor = "red";
         document.getElementById("y").placeholder = "should be a number";
-        alert("Please enter a valid number");
+
         return false;
     } else {
         x = x.replace(',', '.');
@@ -39,7 +46,6 @@ function valid() {
         document.getElementById("y").value = "";
         document.getElementById("y").style.borderColor = "red";
         document.getElementById("y").placeholder = "should be between -5 and 5";
-        // alert("Please enter range for Y, it should be between -5 and 5");
 
         return false;
     }
