@@ -26,9 +26,9 @@ function validate($x, $y, $r)
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
     if (isset($_GET["x"]) && isset($_GET["y"]) && isset($_GET["r"])) {
-        $x = floatval($_GET["x"]);
+        $x = floatval(str_replace(',', '.', $_GET["x"]));
         $y = floatval(str_replace(',', '.', $_GET["y"]));
-        $r = floatval($_GET["r"]);
+        $r = floatval(str_replace(',', '.', $_GET["r"]));
 
         if (validate($x, $y, $r)) {
             $result = chechPoint($x, $y, $r) ? "Попадание" : "Промах";
