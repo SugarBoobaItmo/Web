@@ -26,9 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         if (validate($x, $y, $r)) {
             $result = chechPoint($x, $y, $r) ? "Попадание" : "Промах";
             
-            // $currentTime = date("H:i:s");
-            $currentTime = date("H:i:s", time() + 3 * 60 * 60);
-            
+            $currentTime = $_GET["time"];
+
             $executionTime = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
             // $executionTime = round(microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"], 5);
             $_SESSION["results"][] = array("x" => $x, "y" => $y, "r" => $r, "result" => $result, "time" => $currentTime, "exec_time" => $executionTime);
@@ -48,4 +47,5 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
 } else {
     echo "<tr><td colspan='6'>Неверные данные 3</td></tr>";
 }
+
 ?>

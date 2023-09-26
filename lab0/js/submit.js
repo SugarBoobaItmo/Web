@@ -26,7 +26,10 @@ function submitForm() {
     };
 
     // Open a POST request to point_check.php
-    xhr.open("GET", `point_check.php?x=${x}&y=${y}&r=${r}`, true);
+    var time = new Date();
+    time = time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds();
+    
+    xhr.open("GET", `point_check.php?x=${x}&y=${y}&r=${r}&time=${time}`, true);
 
     xhr.send();
 }
