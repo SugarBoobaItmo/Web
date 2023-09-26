@@ -2,17 +2,24 @@
 session_start();
 // check points in area
 function chechPoint($x, $y, $r)
-{
-    return (((($x * $x + $y * $y) <= $r * $r && $x >= 0 && $y <= 0) ||
-        ($y + $x <= $r && $x >= 0 && $y >= 0) ||
-        ($x <= 0 && $y <= 0 && $x >= (-1) * $r && $y >= (-1) * $r)) && -5 <= $y && $y <= 5);
+{   
+    $check_sector = (($x * $x + $y * $y) <= $r * $r && $x >= 0 && $y <= 0);
+    $check_triangle = ($y + $x <= $r && $x >= 0 && $y >= 0);
+    $check_square = ($x <= 0 && $y <= 0 && $x >= (-1) * $r && $y >= (-1) * $r);
+    $check_y = -5 <= $y && $y <= 5;
+    return ($check_sector || $check_triangle || $check_square) && $check_y;
 }
 
 // validate input data 
 function validate($x, $y, $r)
-{
+{   
     $max_len = 8;
-    return is_numeric($x) && is_numeric($y) && is_numeric($r) && strlen($x) <= $max_len && strlen($y) <= $max_len && strlen($r) <= $max_len && $r > 0 && $r <= 5 && $x >= -4 && $x <= 4 && $y >= -5 && $y <= 5;
+    $check_len = strlen($x) <= $max_len && strlen($y) <= $max_len && strlen($r) <= $max_len;
+    $check_num = is_numeric($x) && is_numeric($y) && is_numeric($r);
+    $check_r = $r > 0 && $r <= 5;
+    $check_x = $x >= -4 && $x <= 4;
+    $check_y = $y >= -5 && $y <= 5;
+    return $check_len && $check_num && $check_r && $check_x && $check_y;
 }
 
 
