@@ -5,6 +5,7 @@ function isNumber(n) {
 }
 
 function valid() {
+    
     var radio_buttons = document.getElementsByName("x");
     var x = 0;
     for (var i = 0; i < radio_buttons.length; i++) {

@@ -175,7 +175,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2" id="post_cell">
-                                        <input type="button" value="Post" id="button" onclick="valid()">
+                                        <input type="submit" value="Post" id="button" onclick="valid(); return false;"/>
                                         <p class="error" id="error"> </p>
                                     </td>
                                 </tr>
@@ -218,6 +218,8 @@
         const selectEelement = document.getElementById('r');
         selectEelement.addEventListener('change', () => drawGraph(selectEelement.value));
     </script>
+
+
 
 
 </body>
