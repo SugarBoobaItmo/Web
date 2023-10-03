@@ -5,96 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Labwork 1</title>
-    <!-- add page icon -->
-    <link rel="shortcut icon" href="img/test.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="../img/test.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/style.css" />
 
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background-image: url("img/bg.jpg");
-            background-repeat: no-repeat;
-            background-size: cover;
-            /* This will make the image cover the entire background */
-            background-attachment: fixed;
-            /* This will make the image fixed when scrolling */
-            background-position: center center;
-            color: rgb(164, 140, 255);
-
-        }
-
-        table {
-            margin: auto;
-            margin-top: 20px;
-            border-collapse: collapse;
-            width: 80%;
-            max-width: 800px;
-            /* background color should be transparent */
-            background-color: rgba(255, 255, 255, 0.3);
-
-
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
-        }
-
-        th,
-        td {
-            padding: 10px;
-            text-align: left;
-            border: 1px solid #dddddd;
-        }
-
-        header {
-            font-family: fantasy;
-            font-weight: normal;
-            font-size: 14px;
-            margin: 20px auto;
-            color: rgb(0, 0, 0, 0.3);
-
-        }
-
-        header p {
-            margin: 0;
-        }
-
-        input[type="radio"] {
-            margin-right: 1%;
-        }
-
-        select {
-            width: 50%;
-            padding: 5px;
-            box-sizing: content-box;
-        }
-
-        input[type="text"] {
-            width: 50%;
-            padding: 5px;
-            box-sizing: content-box;
-        }
-
-        #button {
-            margin-left: 1%;
-            padding: 5px 40px;
-            background-color: rgb(164, 140, 255);
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        #button:hover {
-            background-color: rgb(164, 140, 255, 0.8);
-        }
-
-        .canvas{
-            margin-left: 10%;
-        }
-
-        .error {
-            color: red;
-            display: inline;
-            font-size: 12px;
-        }
-    </style>
 </head>
 
 <body onload="drawGraph(1);">
@@ -209,9 +122,9 @@
         </tbody>
     </table>
     <!-- connect js file -->
-    <script src="js/validate.js"></script>
-    <script src="js/drawer.js"></script>
-    <script src="js/submit.js"></script>
+    <script src="../js/validate.js"></script>
+    <script src="../js/drawer.js"></script>
+    <script src="../js/submit.js"></script>
 
     <script>
         const selectEelement = document.getElementById('r');
