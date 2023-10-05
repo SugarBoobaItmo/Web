@@ -5,7 +5,9 @@ const y_point = width / 2;
 const x_point = width / 2;
 
 function drawPoint(x, y) {
+
     ctx.fillStyle = "red";
+
     ctx.beginPath();
     ctx.moveTo(x_point, y_point);
     ctx.arc(

@@ -1,18 +1,19 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Labwork 1</title>
-    <link rel="shortcut icon" href="../img/test.png" type="image/x-icon" />
-    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="shortcut icon" href="./img/test.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/style.css" />
 
 </head>
 
 <body onload="drawGraph(1);">
     <header>
-        <p>by Khabner Georgiy Evgenievich P3231</p>
+        <p>by Khabner Georgiiiiiiiiiiiiiiiy Evgenievich P3231</p>
         <p>Variant: 8888355</p>
 
     </header>
@@ -101,30 +102,12 @@
                     <canvas id="canvas" width="700px" height="700px" class="canvas"></canvas>
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <table id="resultsTable">
-                        <thead>
-                            <tr>
-                                <th>X</th>
-                                <th>Y</th>
-                                <th>R</th>
-                                <th>Result</th>
-                                <th>Time</th>
-                                <th>Execution time</th>
-                            </tr>
-                        </thead>
-                        <tbody id="results">
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
         </tbody>
     </table>
     <!-- connect js file -->
-    <script src="../js/validate.js"></script>
-    <script src="../js/drawer.js"></script>
-    <script src="../js/submit.js"></script>
+    <script src="./js/validate.js"></script>
+    <script src="./js/drawer.js"></script>
+    <script src="./js/submit.js"></script>
 
     <script>
         const selectEelement = document.getElementById('r');
