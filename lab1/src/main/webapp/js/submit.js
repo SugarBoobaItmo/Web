@@ -15,13 +15,26 @@ function submitForm() {
         "y": y,
         "r": r
     });
-    const baseUrl = window.location.href.endsWith('/') ? window.location.href.slice(0, -1) : window.location.href;
 
-    // Construct the final URL without double slashes
-    const finalUrl = baseUrl + "?" + urlParams.toString();
-
-    // Redirect to the final URL
-    window.location.href = finalUrl;
+    fetch("controller?" + urlParams.toString(), {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        }
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.text();
+    })
+    .then(function (serverAnswer) {
+        let tbody = document.getElementById("resultsTable");
+        tbody.innerHTML = serverAnswer;
+    })
+    .catch(error => {
+        console.error(error);
+    });
+     
 }
 
 

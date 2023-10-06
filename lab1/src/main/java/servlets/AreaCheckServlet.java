@@ -33,7 +33,6 @@ public class AreaCheckServlet extends HttpServlet {
         }
 
         long start = System.nanoTime();
-        response.setContentType("text/html");
             
         boolean valid = CoordinatesValidator.validate(x, y, r);
         if (valid) {
@@ -44,7 +43,7 @@ public class AreaCheckServlet extends HttpServlet {
             model.addPoint(point);
             request.setAttribute("model", model);
 
-            request.getRequestDispatcher("results.jsp").forward(request, response);
+            response.sendRedirect("results.jsp");
         } else {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid input parameters");
         }

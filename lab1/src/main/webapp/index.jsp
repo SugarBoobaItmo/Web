@@ -104,6 +104,10 @@
             </tr>
         </tbody>
     </table>
+
+    <div id="resultsTable">
+        <jsp:include page="results.jsp" />
+    </div>
     <!-- connect js file -->
     <script src="./js/validate.js"></script>
     <script src="./js/drawer.js"></script>

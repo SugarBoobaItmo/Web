@@ -16,7 +16,7 @@ function valid() {
 
     var y = document.getElementById("y").value;
     var r = document.getElementById("r").value;
-
+    
     if (x == "" || y == "" || r == "") {
         
         var error = document.getElementById("error");
