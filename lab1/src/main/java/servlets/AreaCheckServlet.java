@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpSession;
 import model.Model;
 import model.Point;
 import utils.AreaValidator;
-// AreaCheckServlet, осуществляющий проверку попадания точки в область на координатной плоскости и формирующий HTML-страницу с результатами проверки. Должен обрабатывать все запросы, содержащие сведения о координатах точки и радиусе области.
 import utils.CoordinatesValidator;
 
 public class AreaCheckServlet extends HttpServlet {
@@ -45,7 +44,7 @@ public class AreaCheckServlet extends HttpServlet {
 
             request.getRequestDispatcher("results.jsp").forward(request, response);
         } else {
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid input parameters");
         }
     }
 }

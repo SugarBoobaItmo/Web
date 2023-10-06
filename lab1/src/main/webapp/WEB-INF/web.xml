@@ -20,4 +20,23 @@
         <servlet-name>AreaCheckServlet</servlet-name>
         <url-pattern>/areaCheck</url-pattern>
     </servlet-mapping>
+
+    <!-- 404 - Page Not Found -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error_pages/error404.jsp</location>
+    </error-page>
+
+    <!-- 500 - Internal Server Error -->
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error_pages/error500.jsp</location>
+    </error-page>
+
+    <!-- 400 - Bad Request -->
+    <error-page>
+        <error-code>400</error-code>
+        <location>/error_pages/error400.jsp</location>
+    </error-page>
+    
 </web-app>
