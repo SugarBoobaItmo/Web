@@ -55,6 +55,6 @@ function valid() {
     document.getElementById("y").placeholder = "";
     drawGraph(r);
     drawPoint(x, y, r);
-    submitForm();
+    submitForm(x, y, r);
     return true;
 }

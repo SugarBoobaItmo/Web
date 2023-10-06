@@ -1,14 +1,4 @@
-function submitForm() {
-    // Get the form data
-    var radio_buttons = document.getElementsByName("x");
-    var x = 0;
-    for (var i = 0; i < radio_buttons.length; i++) {
-        if (radio_buttons[i].checked) {
-            x = radio_buttons[i].value;
-        }
-    }
-    const y = document.getElementById("y").value;
-    const r = document.getElementById("r").value;
+function submitForm(x, y, r) {
 
     const urlParams = new URLSearchParams({
         "x": x,
