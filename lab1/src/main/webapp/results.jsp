@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="../main/java/model/Model.java" %>
-<%@ page import="../main/java/model/Point.java" %>
+<%@ page import="model.Model" %>
+<%@ page import="model.Point" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,22 +33,23 @@
             <tbody>
                 <% if (request.getSession().getAttribute("model") != null) { %>
                     <% Model model = (Model) request.getSession().getAttribute("model"); %>
-                    <% for (int i = 0; i < model.getPointsSize(); i++) {
-                        Point point = model.getPoints().get(i);
-                         %>
+                    <% for (int i = 0; i < model.getPointsSize(); i++) { %>
+                            <% Point point = model.getPoint(i); %>
                         <tr>
                             <td><%= point.getX() %></td>
                             <td><%= point.getY() %></td>
                             <td><%= point.getR() %></td>
-                            <td><%= point.getResult() %></td>
+                            <td><%= point.getCheck() %></td>
                             <td><%= point.getTime() %></td>
-                            <td><%= point.getExecutionTime() %></td>
+                            <td><%= point.getExec_time() %></td>
                         </tr>
                     <% } %>
                 <% } else { %>
                     <tr>
                         <td colspan="6">No results yet</td>
                     </tr>
+                
+                <% } %>
             </tbody>
         </table>
 </body>
