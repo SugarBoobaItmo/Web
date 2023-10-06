@@ -19,6 +19,9 @@
         <p>Variant: 8888355</p>
 
     </header>
+        <div class="goBack">
+            <a href="./controller">Go back</a>
+        </div>
         <table>
             <thead>
                 <tr>
