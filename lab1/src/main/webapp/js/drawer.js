@@ -5,7 +5,6 @@ const y_point = width / 2;
 const x_point = width / 2;
 
 function drawPoint(x, y) {
-
     ctx.fillStyle = "red";
 
     ctx.beginPath();
@@ -105,7 +104,12 @@ canvas.addEventListener("click", function (event) {
         var x = event.clientX - rect.left;
         var y = event.clientY - rect.top;
         x = (x - x_point) / (width / 20);
+
         x = x.toFixed(0);
+        if (x == 0) {
+            x = 0;
+        }
+
         y = (y_point - y) / (width / 20);
         y = y.toFixed(2);
 
