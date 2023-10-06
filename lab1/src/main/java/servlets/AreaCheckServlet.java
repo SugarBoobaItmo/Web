@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import jakarta.servlet.ServletException;
@@ -27,6 +28,7 @@ public class AreaCheckServlet extends HttpServlet {
         Model model = (Model) session.getAttribute("model");
         if (model == null) {
             model = new Model();
+            model.setPoints(new ArrayList<Point>());
             session.setAttribute("model", model);
         }
 

@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class Model {
-    public static ArrayList<Point> points = new ArrayList<>();
+    private ArrayList<Point> points = new ArrayList<>();
 
     public void addPoint(Point point) {
         points.add(point);
@@ -15,6 +15,10 @@ public class Model {
 
     public int getPointsSize() {
         return points.size();
+    }
+
+    public void setPoints(ArrayList<Point> points) {
+        this.points = points;
     }
     
 }
