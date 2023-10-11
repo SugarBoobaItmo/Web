@@ -36,7 +36,6 @@
                             <td class="y_point"><%= point.getY() %></td>
                             <td class="r_point"><%= point.getR() %></td>
                             <td class="result_point"><%= point.getCheck() %></td>
-                            <td><%= point.getCheck() %></td>
                             <td><%= point.getTime() %></td>
                             <td><%= point.getExec_time() %></td>
                         </tr>
