@@ -4,8 +4,8 @@ const width = 600;
 const y_point = width / 2;
 const x_point = width / 2;
 
-function drawPoint(x, y) {
-    ctx.fillStyle = "red";
+function drawPoint(x, y, color) {
+    ctx.fillStyle = color;
 
     ctx.beginPath();
     ctx.moveTo(x_point, y_point);
@@ -94,6 +94,27 @@ function drawGraph(r) {
 
     ctx.strokeStyle = "black";
     ctx.stroke();
+
+    x_points = document.getElementsByClassName("x_point");
+    y_points = document.getElementsByClassName("y_point");
+    r_points = document.getElementsByClassName("r_point");
+    result_points = document.getElementsByClassName("result_point");
+
+    if (x_points.length == 0) {
+        return;
+    }
+    for (let i = 0; i < x_points.length; i++) {
+        x = x_points[i].innerHTML;
+        y = y_points[i].innerHTML;
+
+        if (result_points[i].innerHTML == "true") {
+            color = "green";
+        } else {
+            color = "red";
+        }
+        drawPoint(x, y, color);
+        console.log("x: " + x + " y: " + y + " r: " + r);
+    }
 }
 
 canvas.addEventListener("click", function (event) {

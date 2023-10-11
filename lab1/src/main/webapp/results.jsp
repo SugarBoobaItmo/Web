@@ -31,10 +31,11 @@
                     <% Model model = (Model) request.getSession().getAttribute("model"); %>
                     <% for (int i = 0; i < model.getPointsSize(); i++) { %>
                             <% Point point = model.getPoint(i); %>
-                        <tr>
-                            <td><%= point.getX() %></td>
-                            <td><%= point.getY() %></td>
-                            <td><%= point.getR() %></td>
+                        <tr class="point_row">
+                            <td class="x_point"><%= point.getX() %></td>
+                            <td class="y_point"><%= point.getY() %></td>
+                            <td class="r_point"><%= point.getR() %></td>
+                            <td class="result_point"><%= point.getCheck() %></td>
                             <td><%= point.getCheck() %></td>
                             <td><%= point.getTime() %></td>
                             <td><%= point.getExec_time() %></td>
