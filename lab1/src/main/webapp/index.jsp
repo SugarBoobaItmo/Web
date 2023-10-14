@@ -11,7 +11,7 @@
 
 </head>
 
-<body>
+<body onload="drawGraph(1,[]);">
     <header>
         <p>by Khabner Georgiiiiiiiiiiiiiiiy Evgenievich P3231</p>
         <p>Variant: 8888355</p>
@@ -99,13 +99,27 @@
             </tr>
             <tr>
                 <td>
-                    <jsp:include page="graph.jsp" />
+                    <div id="graph">
+                        <canvas id="canvas" width="900px" height="900px" class="canvas"></canvas>
+
+                    </div>
                 </td>
             </tr>
             <tr>
                 <td>
                     <div id="resultsTable">
-                        <jsp:include page="results.jsp" />
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>X</th>
+                                    <th>Y</th>
+                                    <th>R</th>
+                                    <th>Result</th>
+                                </tr>
+                            </thead>
+                            <tbody id="results">
+                            </tbody>
+                        </table>
                     </div>
                 </td>
             </tr>
@@ -115,7 +129,15 @@
     <script src="./js/validate.js"></script>
     <script src="./js/drawer.js"></script>
     <script src="./js/submit.js"></script>
+    <script>
+        
+        const selectEelement = document.getElementById('r');
+        selectEelement.addEventListener('change', () => {
+            submitR(selectEelement.value);
+        });
 
+
+    </script>
 
 
 
