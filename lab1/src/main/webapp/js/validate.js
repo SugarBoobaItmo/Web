@@ -53,7 +53,6 @@ function valid() {
 
     document.getElementById("y").style.borderColor = "black";
     document.getElementById("y").placeholder = "";
-    drawGraph(r);
     submitForm(x, y, r);
     return true;
 }

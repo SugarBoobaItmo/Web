@@ -21,7 +21,7 @@ function drawPoint(x, y, r, color) {
     ctx.closePath();
 }
 
-function drawGraph(r) {
+function drawGraph(r, points) {
     ctx.clearRect(0, 0, 1000, 1000);
     ctx.fillStyle = "rgba(91,95,201,0.58)";
     ctx.beginPath();
@@ -95,24 +95,20 @@ function drawGraph(r) {
     ctx.strokeStyle = "black";
     ctx.stroke();
 
-    x_points = document.getElementsByClassName("x_point");
-    y_points = document.getElementsByClassName("y_point");
-    r_points = document.getElementsByClassName("r_point");
-    result_points = document.getElementsByClassName("result_point");
-
-    if (x_points.length == 0) {
+    if (points.length == 0) {
         return;
     }
-    for (let i = 0; i < x_points.length; i++) {
-        x = x_points[i].innerHTML;
-        y = y_points[i].innerHTML;
+    for (let i = 0; i < points.length; i++) {
+        x_res = points[i].x;
+        y_res = points[i].y;
+        r_res = points[i].r;
 
-        if (result_points[i].innerHTML == "true") {
+        if (points[i].check) {
             color = "green";
         } else {
             color = "red";
         }
-        drawPoint(x, y, r, color);
+        drawPoint(x_res, y_res, r, color);
     }
 }
 
