@@ -20,18 +20,15 @@ import utils.CoordinatesValidator;
 public class AreaCheckServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         if (request.getParameter("x") != null && request.getParameter("y") != null
                 && request.getParameter("r") != null) {
             try {
-                System.out.println("check");
                 checkPoint(request, response);
             } catch (NumberFormatException e) {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid input parameters");
             }
         } else if (request.getParameter("r") != null) {
             try {
-                System.out.println("recheck");
                 reCheckPoints(request, response);
             } catch (NumberFormatException e) {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid input parameters");
@@ -46,7 +43,7 @@ public class AreaCheckServlet extends HttpServlet {
         double y = Double.parseDouble(request.getParameter("y"));
         double r = Double.parseDouble(request.getParameter("r"));
 
-        System.out.println("x: " + x + " y: " + y + " r: " + r);
+        // System.out.println("x: " + x + " y: " + y + " r: " + r);
         HttpSession session = request.getSession();
         Model model = (Model) session.getAttribute("model");
         if (model == null) {

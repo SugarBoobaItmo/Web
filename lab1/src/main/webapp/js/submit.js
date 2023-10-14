@@ -26,7 +26,6 @@ function submitForm(x, y, r) {
 }
 
 function submitR(r) {
-    
     const urlParams = new URLSearchParams({
         r: r,
     });
@@ -64,7 +63,7 @@ function updateResults(r, result) {
         let y_cell = row.insertCell(1);
         let r_cell = row.insertCell(2);
         let result_cell = row.insertCell(3);
-        
+
         x_cell.innerHTML = result[i].x;
         y_cell.innerHTML = result[i].y;
         r_cell.innerHTML = result[i].r;
@@ -72,15 +71,4 @@ function updateResults(r, result) {
     }
 
     drawGraph(r, result);
-
-}
-
-function clearForm() {
-    var radio_buttons = document.getElementsByName("x");
-    for (var i = 0; i < radio_buttons.length; i++) {
-        if (radio_buttons[i].checked) {
-            radio_buttons[i].checked = false;
-        }
-    }
-    document.getElementById("y").value = "";
 }
