@@ -1,17 +1,17 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-const width = 600;
+const width = 800;
 const y_point = width / 2;
 const x_point = width / 2;
 
-function drawPoint(x, y, color) {
+function drawPoint(x, y, r, color) {
     ctx.fillStyle = color;
 
     ctx.beginPath();
     ctx.moveTo(x_point, y_point);
     ctx.arc(
-        x_point + (width / 20) * x,
-        y_point - (width / 20) * y,
+        x_point + (width / 20) * x/r*2,
+        y_point - (width / 20) * y/r*2,
         3,
         0,
         2 * Math.PI
@@ -64,33 +64,33 @@ function drawGraph(r) {
 
         // print numbers for x
         ctx.font = "10px Arial";
-        ctx.fillText(i, x_point + (width / 20) * i - 3, y_point + 20);
-        ctx.fillText(-i, x_point - (width / 20) * i - 3, y_point + 20);
+        ctx.fillText(0.5*r*i, x_point + (width / 20) * i - 3, y_point + 20);
+        ctx.fillText(-0.5*r*i, x_point - (width / 20) * i - 3, y_point + 20);
         // print numbers for y
-        ctx.fillText(i, x_point - 20, y_point - (width / 20) * i + 3);
-        ctx.fillText(-i, x_point - 20, y_point + (width / 20) * i + 3);
+        ctx.fillText(0.5*r*i, x_point - 20, y_point - (width / 20) * i + 3);
+        ctx.fillText(-0.5*r*i, x_point - 20, y_point + (width / 20) * i + 3);
     }
 
     // circle part
     ctx.moveTo(x_point, y_point);
-    ctx.arc(x_point, y_point, (width / 20) * r, 4.7, (2 * Math.PI) / 2, true);
+    ctx.arc(x_point, y_point, (width / 20), 4.7, (2 * Math.PI) / 2, true);
     ctx.fill();
 
     // triangle part
     ctx.moveTo(x_point, y_point);
-    ctx.lineTo(x_point - (width / 20) * r, y_point);
-    ctx.lineTo(x_point, y_point + (width / 20) * r);
+    ctx.lineTo(x_point - (width / 20), y_point);
+    ctx.lineTo(x_point, y_point + (width / 20));
     ctx.fill();
 
     // rectangle part
-    ctx.fillRect(x_point, y_point, (width / 20) * r * 2, (width / 20) * r * 2);
+    ctx.fillRect(x_point, y_point, (width / 20) * 2, (width / 20) * 2);
 
     // paint black border for rectangle
-    ctx.moveTo(x_point + (width / 20) * r * 2, y_point);
+    ctx.moveTo(x_point + (width / 20) * 2, y_point);
     ctx.lineTo(x_point, y_point);
-    ctx.lineTo(x_point, y_point + (width / 20) * r * 2);
-    ctx.lineTo(x_point + (width / 20) * r * 2, y_point + (width / 20) * r * 2);
-    ctx.lineTo(x_point + (width / 20) * r * 2, y_point);
+    ctx.lineTo(x_point, y_point + (width / 20) * 2);
+    ctx.lineTo(x_point + (width / 20) * 2, y_point + (width / 20) * 2);
+    ctx.lineTo(x_point + (width / 20) * 2, y_point);
 
     ctx.strokeStyle = "black";
     ctx.stroke();
@@ -112,8 +112,7 @@ function drawGraph(r) {
         } else {
             color = "red";
         }
-        drawPoint(x, y, color);
-        console.log("x: " + x + " y: " + y + " r: " + r);
+        drawPoint(x, y, r, color);
     }
 }
 
@@ -124,14 +123,14 @@ canvas.addEventListener("click", function (event) {
     if (1 <= r && r <= 3) {
         var x = event.clientX - rect.left;
         var y = event.clientY - rect.top;
-        x = (x - x_point) / (width / 20);
+        x = (x - x_point) / (width / 20)*r/2;
 
         x = x.toFixed(0);
         if (x == 0) {
             x = 0;
         }
 
-        y = (y_point - y) / (width / 20);
+        y = (y_point - y) / (width / 20)*r/2;
         y = y.toFixed(2);
 
         var radio_buttons = document.getElementsByName("x");

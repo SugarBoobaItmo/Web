@@ -12,7 +12,7 @@
 </head>
 
 <body onload="drawGraph(1);">
-    <canvas id="canvas" width="700px" height="700px" class="canvas"></canvas>
+    <canvas id="canvas" width="900px" height="900px" class="canvas"></canvas>
     <script>
         
         const selectEelement = document.getElementById('r');
