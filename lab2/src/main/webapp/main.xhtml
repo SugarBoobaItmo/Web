@@ -13,7 +13,30 @@
         <h:outputText value="Вариант: 912737" /><br />
     </div>
     <h:form>
-        
+        <h:outputLabel for="x" value="Coordinate X (-5; 5)"/>
+        <h:inputText id="x" styleClass="coords-input" value="#{xBean.XBeanValue}"
+                     required="true" maxlength="7"
+                     requiredMessage="Value X is required"
+                     validatorMessage="The value must be from -5 to 5">
+            <f:converter converterId="jakarta.faces.Double"/>
+            <f:validateDoubleRange minimum="-5" maximum="5"/>
+        </h:inputText>
+        <!-- <h:outputText value="#{xBean.XBeanValue}"/> -->
+        <h:commandButton value="Send" styleClass="submit-btn">
+            <f:ajax execute="@form" listener="#{resultsControllerBean.addResult(xBean.XBeanValue)}" render="@form results-table"/>
+        </h:commandButton>
+    </h:form>
+    
+    <h:dataTable id="results-table" var="result" value="#{resultsControllerBean.results}">
+        <h:column>
+            <f:facet name="header">
+                <h:outputText value="x"/>
+            </f:facet>
+            <h:outputText value="#{result}"/>
+        </h:column>
+    </h:dataTable>
+
+    <h:form>
         <h:commandLink value="Перейти назад" action="index" />
     </h:form>
 </h:body>
