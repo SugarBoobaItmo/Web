@@ -2,6 +2,8 @@ package com.example.model;
 
 
 import jakarta.annotation.PostConstruct;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,8 +13,12 @@ import com.example.db.DAOFactory;
 import com.example.entity.PointsResultEntity;
 import com.example.utils.ResultUtils;
 
+@Getter
+@Setter
 public class ResultsControllerBean implements Serializable {
     private XBean xBean;
+    private YBean yBean;
+    private RBean rBean;
     private ArrayList<Double> results = new ArrayList<>();
 
     @PostConstruct
@@ -20,33 +26,18 @@ public class ResultsControllerBean implements Serializable {
         Collection<PointsResultEntity> resultsEntities = DAOFactory.getInstance().getResultDAO().getAllResults();
         for (PointsResultEntity result : resultsEntities) {
             results.add(result.getX());
+            results.add(result.getY());
+            results.add(result.getR());
         }
     }
 
 
-    public void addResult(Double x) {
+    public void addResult(Double x, Double y, Double r) {
         results.add(x);
+        results.add(y);
+        results.add(r);
         // add to db
-        ResultUtils.addResult(x);
+        ResultUtils.addResult(x, y, r);
     }
 
-    public XBean getXBean() {
-        return xBean;
-    }
-
-    public void setxBean(XBean xBean) {
-        this.xBean = xBean;
-    }
-
-    public void setXBean(XBean xBean) {
-        this.xBean = xBean;
-    }
-
-    public ArrayList<Double> getResults() {
-        return results;
-    }
-
-    public void setResults(ArrayList<Double> results) {
-        this.results = results;
-    }
 }

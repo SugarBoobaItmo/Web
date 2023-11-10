@@ -1,43 +1,88 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+    <h:head>
+        <title>Проверка точки</title>
+    </h:head>
+    <h:body>
+        <div id="header">
+            <h:outputText value="ФИО: Хабнер Георгий Евгеньевич" /><br />
+            <h:outputText value="Группа: P3231" /><br />
+            <h:outputText value="Вариант: 912737" /><br />
+        </div>
+        <h:form>
+            <h:outputLabel value="Coordinate X" />
+            
+            <ui:repeat value="#{xBean.XValues}" var="xValue">
+                <h:commandLink
+                    action="#{xBean.setXBeanValue(xValue)}"
+                    styleClass="coords-input"
+                    value="#{xValue}"
+                >
+                    <f:ajax execute="@form" render="@form" />
+                </h:commandLink>
+            </ui:repeat>
+            <h:outputLabel for="y" value="Coordinate Y" />
 
-<h:head>
-    <title>Проверка точки</title>
-</h:head>
-<h:body>
-    <div id="header">
-        <h:outputText value="ФИО: Хабнер Георгий Евгеньевич" /><br />
-        <h:outputText value="Группа: P3231" /><br />
-        <h:outputText value="Вариант: 912737" /><br />
-    </div>
-    <h:form>
-        <h:outputLabel for="x" value="Coordinate X (-5; 5)"/>
-        <h:inputText id="x" styleClass="coords-input" value="#{xBean.XBeanValue}"
-                     required="true" maxlength="7"
-                     requiredMessage="Value X is required"
-                     validatorMessage="The value must be from -5 to 5">
-            <f:converter converterId="jakarta.faces.Double"/>
-            <f:validateDoubleRange minimum="-5" maximum="5"/>
-        </h:inputText>
-        <!-- <h:outputText value="#{xBean.XBeanValue}"/> -->
-        <h:commandButton value="Send" styleClass="submit-btn">
-            <f:ajax execute="@form" listener="#{resultsControllerBean.addResult(xBean.XBeanValue)}" render="@form results-table"/>
-        </h:commandButton>
-    </h:form>
-    
-    <h:dataTable id="results-table" var="result" value="#{resultsControllerBean.results}">
-        <h:column>
-            <f:facet name="header">
-                <h:outputText value="x"/>
-            </f:facet>
-            <h:outputText value="#{result}"/>
-        </h:column>
-    </h:dataTable>
+            <h:inputText
+                id="y"
+                styleClass="coords-input"
+                value="#{yBean.YBeanValue}"
+                required="true"
+                maxlength="7"
+                requiredMessage="Value Y is required"
+                validatorMessage="The value must be from -5 to 5"
+            >
+                <f:converter converterId="jakarta.faces.Double" />
+                <f:validateDoubleRange minimum="-3" maximum="5" />
+            </h:inputText>
+            <h:message for="y" />
 
-    <h:form>
-        <h:commandLink value="Перейти назад" action="index" />
-    </h:form>
-</h:body>
+            <h:outputLabel for="r" value="Coordinate R" />
+
+            <p:spinner
+                id="r"
+                styleClass="spinnerField"
+                value="#{rBean.RBeanValue}"
+                min="1"
+                max="3"
+                stepFactor="0.5"
+                required="true"
+                requiredMessage="Value R is required"
+            />
+            <h:message for="r" />
+
+            <h:commandButton value="Send" styleClass="submit-btn">
+                <f:ajax
+                    execute="@form"
+                    listener="#{resultsControllerBean.addResult(xBean.XBeanValue, yBean.YBeanValue, rBean.RBeanValue)}"
+                    render="@form results-table"
+                />
+            </h:commandButton>
+        </h:form>
+
+        <h:dataTable
+            id="results-table"
+            var="result"
+            value="#{resultsControllerBean.results}"
+        >
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="x" />
+                    <h:outputText value="y" />
+                    <h:outputText value="r" />
+                </f:facet>
+                <h:outputText value="#{result}" />
+            </h:column>
+        </h:dataTable>
+
+        <h:form>
+            <h:commandLink value="Перейти назад" action="index" />
+        </h:form>
+    </h:body>
 </html>
