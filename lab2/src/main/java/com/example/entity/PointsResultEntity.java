@@ -1,6 +1,5 @@
 package com.example.entity;
 
-import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,8 +23,8 @@ public class PointsResultEntity {
     private double y;
     private double r;
     private boolean result;
-    private LocalDateTime time;
-    private LocalDateTime executionTime;
+    private String time;
+    private String executionTime;
 
     @Id
     @Column
@@ -51,17 +50,17 @@ public class PointsResultEntity {
     }
 
     @Column
-    public boolean isResult() {
+    public boolean getResult() {
         return result;
     }
 
     @Column
-    public LocalDateTime getTime() {
+    public String getTime() {
         return time;
     }
 
     @Column
-    public LocalDateTime getExecutionTime() {
+    public String getExecutionTime() {
         return executionTime;
     }
 

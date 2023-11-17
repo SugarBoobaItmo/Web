@@ -15,48 +15,54 @@ public class ResultDAOImpl implements ResultDAO {
 
     @Override
     public void addNewResult(PointsResultEntity result) {
-        executeInTransaction(() -> entityManager.persist(result));
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.persist(result);
+        transaction.commit();
     }
 
     @Override
     public void updateResult(Long result_id, PointsResultEntity result) {
-        executeInTransaction(() -> entityManager.merge(result));
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.merge(result);
+        transaction.commit();
+
     }
 
     @Override
     public PointsResultEntity getResultById(Long result_id) {
-        return entityManager.getReference(PointsResultEntity.class, result_id);
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<PointsResultEntity> query = builder.createQuery(PointsResultEntity.class);
+        Root<PointsResultEntity> root = query.from(PointsResultEntity.class);
+        query.select(root).where(builder.equal(root.get("id"), result_id));
+        return entityManager.createQuery(query).getSingleResult();
     }
 
     @Override
     public Collection<PointsResultEntity> getAllResults() {
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<PointsResultEntity> criteriaQuery = criteriaBuilder.createQuery(PointsResultEntity.class);
-        Root<PointsResultEntity> root = criteriaQuery.from(PointsResultEntity.class);
-        return entityManager.createQuery( criteriaQuery.select(root)).getResultList();
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<PointsResultEntity> query = builder.createQuery(PointsResultEntity.class);
+        Root<PointsResultEntity> root = query.from(PointsResultEntity.class);
+        query.select(root);
+        return entityManager.createQuery(query).getResultList();
     }
 
     @Override
     public void deleteResult(PointsResultEntity result) {
-        executeInTransaction(() -> entityManager.remove(result));
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.remove(result);
+        transaction.commit();
     }
 
     @Override
     public void clearResults() {
-        executeInTransaction(entityManager::clear);
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.createQuery("DELETE FROM PointsResultEntity").executeUpdate();
+        transaction.commit();
     }
 
-    private void executeInTransaction(Runnable action) {
-        EntityTransaction transaction = entityManager.getTransaction();
-        try {
-            transaction.begin();
-            action.run();
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null && transaction.isActive()) {
-                transaction.rollback();
-            }
-            throw new RuntimeException("Transaction failed", e);
-        }
-    }
+
 }
