@@ -18,7 +18,7 @@ public class RBean implements Serializable {
         if (o == null){
             FacesMessage message = new FacesMessage("Input R!");
             throw new ValidatorException(message);
-        } else if (Double.parseDouble(o.toString()) > 3 || Double.parseDouble(o.toString()) < 1){
+        } else if (Double.parseDouble(o.toString()) > 3 || Double.parseDouble(o.toString()) < 1 || Double.parseDouble(o.toString()) % 0.5 != 0){
             FacesMessage message = new FacesMessage("R must be in range [1;3]! with step 0.5!");
             throw new ValidatorException(message);
         }

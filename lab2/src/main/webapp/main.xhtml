@@ -29,14 +29,20 @@
                         styleClass="coords-input"
                         value="#{xValue}"
                     >
-                        <f:ajax execute="@form" render="@form" />
+                        <f:ajax execute="@this" render="@form" />
                     </h:commandLink>
                 </ui:repeat>
                 <h:inputHidden
                     id="x"
                     value="#{xBean.value}"
                     validator="#{xBean.validate}"
-                />
+                    required="true"
+                    requiredMessage="X is required"
+                    converterMessage="X must be a number between -3 and 5"
+                    validatorMessage="X must be a number between -3 and 5"
+                >
+                    <f:converter converterId="doubleConverter" />
+                </h:inputHidden>
                 <h:message for="x" />
             </div>
 
@@ -47,11 +53,14 @@
                     styleClass="coords-input"
                     value="#{yBean.value}"
                     maxlength="7"
-                    size="7"
-                    validator="#{yBean.validate}"
-                    >
-                    <!-- <f:convertNumber type="number" pattern="#,##0.00" /> -->
-                    <f:convertNumber pattern="#,##0.00" />
+                    required="true"
+                    requiredMessage="Y is required"
+                    validatorMessage="Y must be a number between -3 and 5"
+                    converterMessage="Y must be a number between -3 and 5"
+                >
+                    <f:converter converterId="doubleConverter" />
+                    <f:validateDoubleRange minimum="-3" maximum="5" for="y" />
+                    <f:ajax execute="@this" render="@form" />
                 </h:inputText>
                 <h:message for="y" />
             </div>
@@ -66,10 +75,17 @@
                         min="1.0"
                         max="3.0"
                         stepFactor="0.5"
+                        required="true"
+                        requiredMessage="R is required"
+                        validatorMessage="R must be a number between 1 and 3"
+                        converterMessage="R must be a number between 1 and 3"
+                        validator="#{rBean.validate}"
                     >
+                        <f:converter converterId="doubleConverter" />
                         <p:ajax
                             process="@this"
                             update="canvas-panel results-table"
+                            listener="#{resultsControllerBean.updateR(rBean.value)}"
                         />
                     </p:spinner>
                 </p:outputPanel>
@@ -81,7 +97,7 @@
                     <f:ajax
                         execute="@form"
                         listener="#{resultsControllerBean.addResult(xBean.value, yBean.value, rBean.value)}"
-                        render="@form results-table canvas-panel"
+                        render="results-table canvas-panel"
                     />
                 </h:commandButton>
             </div>
@@ -91,7 +107,7 @@
                     value="Clear"
                     styleClass="button"
                     action="#{resultsControllerBean.clearResults}"
-                    render="@form results-table canvas-panel"
+                    render="results-table canvas-panel"
                 />
             </div>
         </h:form>
@@ -142,26 +158,24 @@
         <p:outputPanel id="canvas-panel">
             <script>
 
-                    #{resultsControllerBean.updateR(rBean.value)}
-                    var r = #{rBean.value};
-                    results = [];
-                    <ui:repeat var="result" value="#{resultsControllerBean.results}">
-                        results.push({
-                            x: #{result.x},
-                            y: #{result.y},
-                            r: r,
-                            result: "#{result.result}",
-                        });
-                    </ui:repeat>
-                    drawGraph(#{rBean.value}, results);                    
+                #{resultsControllerBean.updateR(rBean.value)}
+                var r = #{rBean.value};
+                results = [];
+                <ui:repeat var="result" value="#{resultsControllerBean.results}">
+                    results.push({
+                        x: #{result.x},
+                        y: #{result.y},
+                        r: r,
+                        result: "#{result.result}",
+                    });
+                </ui:repeat>
+                drawGraph(#{rBean.value}, results);
             </script>
         </p:outputPanel>
 
         <h:outputScript library="js" name="drawer.js" />
 
-        <h:outputScript>
-            drawGraph(#{rBean.value}, results);
-        </h:outputScript>
+        <h:outputScript> drawGraph(#{rBean.value}, results); </h:outputScript>
 
         <h:form id="click-form">
             <h:inputHidden id="x-click" value="#{xBean.value}" />

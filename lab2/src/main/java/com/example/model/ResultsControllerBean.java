@@ -1,9 +1,13 @@
 package com.example.model;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -37,7 +41,7 @@ public class ResultsControllerBean implements Serializable {
         point.setTime(java.time.LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")));
         boolean result = AreaValidator.checkArea(x, y, r);
         point.setResult(result);
-        point.setExecutionTime(String.format("%.9f", (System.nanoTime() - start) / 1000000000.0));        
+        point.setExecutionTime(String.format("%.9f", (System.nanoTime() - start) / 1000000000.0));
 
         DAOFactory.getInstance().getResultDAO().addNewResult(point);
         results.add(point);
@@ -54,7 +58,12 @@ public class ResultsControllerBean implements Serializable {
     public void clearResults() {
         results.clear();
         DAOFactory.getInstance().getResultDAO().clearResults();
-        
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        try {
+            ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

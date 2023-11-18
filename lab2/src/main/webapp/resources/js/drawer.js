@@ -16,7 +16,6 @@ function drawPoint(x, y, r, color) {
         0,
         2 * Math.PI
     );
-    // ctx.fillStyle = result ? "green" : "red";
     ctx.fill();
     ctx.closePath();
 }
@@ -103,6 +102,10 @@ function drawGraph(r, points) {
         x_res = points[i].x;
         y_res = points[i].y;
         r_res = points[i].r;
+
+        if (!checkPoint(x_res, y_res, r_res)) {
+            continue;
+        }
 
         if (points[i].result == "true") {
             color = "green";
