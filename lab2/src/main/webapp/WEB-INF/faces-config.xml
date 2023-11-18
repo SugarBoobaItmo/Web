@@ -52,6 +52,7 @@
         <navigation-case>
             <from-outcome>main</from-outcome>
             <to-view-id>/main.xhtml</to-view-id>
+            <redirect />
         </navigation-case>
     </navigation-rule>
 

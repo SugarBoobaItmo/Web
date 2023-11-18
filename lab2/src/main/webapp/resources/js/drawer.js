@@ -22,7 +22,7 @@ function drawPoint(x, y, r, color) {
 
 function drawGraph(r, points) {
     ctx.clearRect(0, 0, 1000, 1000);
-    ctx.fillStyle = "rgba(91,95,201,0.58)";
+    ctx.fillStyle = "rgba(113,103,103,0.58)";
     ctx.beginPath();
 
     line_width = 600;

@@ -1,13 +1,6 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-image: url("../img/bg.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    /* This will make the image cover the entire background */
-    background-attachment: fixed;
-    /* This will make the image fixed when scrolling */
-    background-position: center center;
-    color: rgb(164, 140, 255);
+    color: rgb(113 103 103);
 }
 
 table {
@@ -41,18 +34,9 @@ header p {
     margin: 0;
 }
 
-input[type="radio"] {
-    margin-right: 1%;
-}
-
-select {
-    width: 50%;
-    padding: 5px;
-    box-sizing: content-box;
-}
 
 input[type="text"] {
-    width: 50%;
+    width: 70%;
     padding: 5px;
     box-sizing: content-box;
 }
@@ -60,7 +44,7 @@ input[type="text"] {
 .button {
     margin-left: 1%;
     padding: 5px 40px;
-    background-color: rgb(164, 140, 255);
+    background-color: rgb(222 220 232);
     color: rgb(14, 13, 13);
     border: none;
     cursor: pointer;
@@ -71,11 +55,68 @@ input[type="text"] {
 }
 
 .canvas {
-    margin-left: 10%;
+    display: block;
+    margin: 1% auto; 
+    /* padding-left: 5% */
+}
+
+.coords-input {
+    margin: 5px;
+}
+
+
+#page-back {
+    margin-top: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(113 103 103);
+    font-weight: bold;
+    /* padding: 5px; */
+}
+
+a:hover {
+    color: rgb(164, 140, 255, 0.8);
+}
+
+a.coords-input{
+    display:inline-block;
+    margin-right:2%;
+}
+
+.ui-spinner .ui-spinner-down {
+    background-color: rgb(222 220 232);
+    border: none;
+}
+
+.ui-spinner .ui-spinner-up {
+    background-color: rgb(222 220 232);
+    border: none;
+}
+
+.ui-spinner .ui-spinner-down:hover {
+    background-color: rgb(164, 140, 255, 0.8);
+}
+
+.ui-spinner .ui-spinner-up:hover {
+    background-color: rgb(164, 140, 255, 0.8);
 }
 
 .error {
     color: red;
-    display: inline;
     font-size: 12px;
+    font-weight: bold;
+    margin-left: 30%;
+}
+
+#time-form {
+    text-align: center;
+    margin-top: 15%; 
+    font-size: 90px;
+}
+
+.to-main {
+    position: fixed;
+    bottom: 20px; 
 }
