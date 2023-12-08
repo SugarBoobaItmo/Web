@@ -4,6 +4,9 @@ import java.util.Collection;
 
 import com.example.entity.PointsResultEntity;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public interface ResultDAO {
     void addNewResult(PointsResultEntity result);
 

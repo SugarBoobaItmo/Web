@@ -3,6 +3,7 @@ package com.example.model;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.example.db.DAOFactory;
+import com.example.db.ResultDAO;
 import com.example.entity.PointsResultEntity;
 import com.example.utils.AreaValidator;
 
@@ -25,9 +26,12 @@ public class ResultsControllerBean implements Serializable {
     private RBean rBean;
     private Collection<PointsResultEntity> results = new ArrayList<>();
 
+    @Inject
+    private ResultDAO resultDAO;
+
     @PostConstruct
     public void init() {
-        results = DAOFactory.getInstance().getResultDAO().getAllResults();
+        results = resultDAO.getAllResults();
     }
 
     public void addResult(Double x, Double y, Double r) {
@@ -43,8 +47,11 @@ public class ResultsControllerBean implements Serializable {
         point.setResult(result);
         point.setExecutionTime(String.format("%.9f", (System.nanoTime() - start) / 1000000000.0));
 
-        DAOFactory.getInstance().getResultDAO().addNewResult(point);
+        resultDAO.addNewResult(point);
         results.add(point);
+
+        yBean.setValue(0.0);
+        xBean.setValue(0.0);
     }
 
     public void updateR(Double r) {
@@ -57,13 +64,12 @@ public class ResultsControllerBean implements Serializable {
 
     public void clearResults() {
         results.clear();
-        DAOFactory.getInstance().getResultDAO().clearResults();
-        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        try {
-            ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        resultDAO.clearResults();
+        // ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        // try {
+        // ec.redirect(((HttpServletRequest) ec.getRequest()).getRequestURI());
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // }
     }
-
 }

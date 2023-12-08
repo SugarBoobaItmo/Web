@@ -1,14 +1,18 @@
 package com.example.db;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.util.Properties;
 
+@ApplicationScoped
 public class JPAUtils {
-    private static final EntityManagerFactory factory;
+    private final EntityManagerFactory factory;
 
-    static {
+    public JPAUtils() {
         try {
             Properties info = new Properties();
             info.load(JPAUtils.class.getClassLoader().getResourceAsStream("/db.cfg"));
@@ -19,7 +23,8 @@ public class JPAUtils {
         }
     }
 
-    public static EntityManagerFactory getFactory() {
-        return factory;
+    @Produces
+    public EntityManager getEntityManagerFactory() {
+        return factory.createEntityManager();
     }
 }

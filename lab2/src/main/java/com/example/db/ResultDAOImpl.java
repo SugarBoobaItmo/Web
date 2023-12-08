@@ -1,17 +1,21 @@
 package com.example.db;
 
+import java.util.Collection;
+
+import com.example.entity.PointsResultEntity;
+
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 
-import java.util.Collection;
-
-import com.example.entity.PointsResultEntity;
-
+@Dependent
 public class ResultDAOImpl implements ResultDAO {
-    private final EntityManager entityManager = JPAUtils.getFactory().createEntityManager();
+    @Inject
+    private EntityManager entityManager;
 
     @Override
     public void addNewResult(PointsResultEntity result) {
@@ -63,6 +67,4 @@ public class ResultDAOImpl implements ResultDAO {
         entityManager.createQuery("DELETE FROM PointsResultEntity").executeUpdate();
         transaction.commit();
     }
-
-
 }

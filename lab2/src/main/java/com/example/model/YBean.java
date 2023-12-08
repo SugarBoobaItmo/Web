@@ -12,16 +12,14 @@ import java.io.Serializable;
 public class YBean implements Serializable {
     private Double value = 0.0;
 
-
     public void validate(FacesContext facesContext,
-                                UIComponent uiComponent, Object o){
-        if (o == null){
+            UIComponent uiComponent, Object o) {
+        if (o == null) {
             FacesMessage message = new FacesMessage("Input Y!");
             throw new ValidatorException(message);
-        } else if (Double.parseDouble(o.toString()) > 5 || Double.parseDouble(o.toString()) < -3){
+        } else if (Double.parseDouble(o.toString()) > 5 || Double.parseDouble(o.toString()) < -3) {
             FacesMessage message = new FacesMessage("Y must be in range [-3;5]!");
             throw new ValidatorException(message);
         }
     }
-
 }

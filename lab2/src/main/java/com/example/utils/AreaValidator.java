@@ -6,7 +6,6 @@ public class AreaValidator {
     }
 
     public static boolean checkSector(double x, double y, double r) {
-        // r = r / 2;
         return ((x * x + y * y) <= r * r && x >= 0 && y <= 0);
     }
 

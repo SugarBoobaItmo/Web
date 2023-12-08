@@ -75,7 +75,7 @@
                                     maximum="5"
                                     for="y"
                                 />
-                                <f:ajax execute="@this" render="@form" />
+                                <f:ajax execute="@this" render="r" />
                             </h:inputText>
                         </div>
                     </td>
@@ -93,12 +93,8 @@
                                     required="true"
                                     requiredMessage="R is required"
                                     validatorMessage="R must be a number between 1 and 3"
-                                    converterMessage="R must be a number between 1 and 3"
                                     validator="#{rBean.validate}"
                                 >
-                                    <f:converter
-                                        converterId="doubleConverter"
-                                    />
                                     <p:ajax
                                         process="@this"
                                         update="canvas-panel results-table"
@@ -115,19 +111,20 @@
                                 <f:ajax
                                     execute="@form"
                                     listener="#{resultsControllerBean.addResult(xBean.value, yBean.value, rBean.value)}"
-                                    render="results-table canvas-panel"
+                                    render="results-table canvas-panel @form"
                                 />
                             </h:commandButton>
                         </div>
                     </td>
                     <td>
                         <div id="clear-button">
-                            <h:commandButton
-                                value="Clear"
-                                styleClass="button"
-                                action="#{resultsControllerBean.clearResults}"
-                                render="results-table canvas-panel"
-                            />
+                            <h:commandButton value="Clear" styleClass="button">
+                                <f:ajax
+                                    execute="@form"
+                                    listener="#{resultsControllerBean.clearResults}"
+                                    render="results-table canvas-panel @form"
+                                />
+                            </h:commandButton>
                         </div>
                     </td>
                 </tr>
@@ -175,25 +172,25 @@
         </h:dataTable>
 
         <h:form id="page-back">
+            <!-- i need to set 0 to xBean.value -->
             <h:commandLink value="Перейти назад" action="index" />
         </h:form>
 
         <p:outputPanel id="canvas-panel">
-            <script>
-
-                #{resultsControllerBean.updateR(rBean.value)}
-                var r = #{rBean.value};
-                results = [];
-                <ui:repeat var="result" value="#{resultsControllerBean.results}">
-                    results.push({
-                        x: #{result.x},
-                        y: #{result.y},
-                        r: r,
-                        result: "#{result.result}",
-                    });
+            <!-- <script> -->
+            <h:outputScript>
+                #{resultsControllerBean.updateR(rBean.value)} var r =
+                #{rBean.value}; results = [];
+                <ui:repeat
+                    var="result"
+                    value="#{resultsControllerBean.results}"
+                >
+                    results.push({ x: #{result.x}, y: #{result.y}, r: r, result:
+                    "#{result.result}", });
                 </ui:repeat>
                 drawGraph(#{rBean.value}, results);
-            </script>
+            </h:outputScript>
+            <!-- </script> -->
         </p:outputPanel>
 
         <h:outputScript library="js" name="drawer.js" />
@@ -206,8 +203,10 @@
             <p:remoteCommand
                 name="clickGraph"
                 action="#{resultsControllerBean.addResult(xBean.value, yBean.value, rBean.value)}"
-                update="x-click y-click results-table canvas-panel"
+                update="x-click y-click results-table canvas-panel points-select:r"
             />
         </h:form>
     </h:body>
 </html>
+
+<!-- change script to ... and check f:messages on the anothe place -->

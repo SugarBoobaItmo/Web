@@ -103,10 +103,6 @@ function drawGraph(r, points) {
         y_res = points[i].y;
         r_res = points[i].r;
 
-        if (!checkPoint(x_res, y_res, r_res)) {
-            continue;
-        }
-
         if (points[i].result == "true") {
             color = "green";
         } else {
@@ -130,7 +126,7 @@ function clickPoint(event){
     var y = event.clientY - rect.top;
     x = (x - x_point) / (width / 20)*r/2;
 
-    x = x.toFixed(0);
+    x = x.toFixed(2);
     if (x == 0) {
         x = 0;
     }
@@ -138,10 +134,7 @@ function clickPoint(event){
     y = (y_point - y) / (width / 20)*r/2;
     y = y.toFixed(2);
 
-    if (checkPoint(x, y, r)) {
-
-        document.getElementById("click-form:x-click").value = x;
-        document.getElementById("click-form:y-click").value = y;
-        clickGraph();
-    }
+    document.getElementById("click-form:x-click").value = x;
+    document.getElementById("click-form:y-click").value = y;
+    clickGraph();
 }

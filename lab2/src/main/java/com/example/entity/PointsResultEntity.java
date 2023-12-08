@@ -1,6 +1,5 @@
 package com.example.entity;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -63,7 +62,5 @@ public class PointsResultEntity {
     public String getExecutionTime() {
         return executionTime;
     }
-
-
 
 }
