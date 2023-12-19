@@ -1,4 +1,4 @@
-package momsDeveloper.itmoweb.exceptions;
+package momsDeveloper.itmoweb.lab3.exceptions;
 
 import java.sql.Date;
 

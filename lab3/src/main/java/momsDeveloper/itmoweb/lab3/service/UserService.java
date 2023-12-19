@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
-import momsDeveloper.itmoweb.dtos.RegistrationUserDto;
+import momsDeveloper.itmoweb.lab3.dtos.RegistrationUserDto;
 import momsDeveloper.itmoweb.lab3.model.entity.Role;
 import momsDeveloper.itmoweb.lab3.model.entity.User;
 import momsDeveloper.itmoweb.lab3.repo.UserRepo;

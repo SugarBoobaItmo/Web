@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import momsDeveloper.itmoweb.dtos.JwtRequest;
-import momsDeveloper.itmoweb.dtos.RegistrationUserDto;
 
 import org.springframework.http.ResponseEntity;
 
+import momsDeveloper.itmoweb.lab3.dtos.JwtRequest;
+import momsDeveloper.itmoweb.lab3.dtos.RegistrationUserDto;
 import momsDeveloper.itmoweb.lab3.service.AuthService;
 
 @RestController

@@ -1,4 +1,4 @@
-package momsDeveloper.itmoweb.dtos;
+package momsDeveloper.itmoweb.lab3.dtos;
 
 import org.springframework.lang.NonNull;
 

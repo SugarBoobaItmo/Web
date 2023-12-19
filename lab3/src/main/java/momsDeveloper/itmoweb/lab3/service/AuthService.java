@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import lombok.AllArgsConstructor;
-import momsDeveloper.itmoweb.dtos.JwtRequest;
-import momsDeveloper.itmoweb.dtos.JwtResponse;
-import momsDeveloper.itmoweb.dtos.RegistrationUserDto;
-import momsDeveloper.itmoweb.dtos.UserDto;
-import momsDeveloper.itmoweb.exceptions.AppError;
+import momsDeveloper.itmoweb.lab3.dtos.JwtRequest;
+import momsDeveloper.itmoweb.lab3.dtos.JwtResponse;
+import momsDeveloper.itmoweb.lab3.dtos.RegistrationUserDto;
+import momsDeveloper.itmoweb.lab3.dtos.UserDto;
+import momsDeveloper.itmoweb.lab3.exceptions.AppError;
 import momsDeveloper.itmoweb.lab3.model.entity.User;
 
 @Service
@@ -27,9 +27,11 @@ public class AuthService {
     public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest authRequest) {
 
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getLogin(), authRequest.getPassword()));
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(authRequest.getLogin(), authRequest.getPassword()));
         } catch (BadCredentialsException e) {
-            return new ResponseEntity<>(new AppError(HttpStatus.UNAUTHORIZED.value(), e.getMessage()), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(new AppError(HttpStatus.UNAUTHORIZED.value(), e.getMessage()),
+                    HttpStatus.UNAUTHORIZED);
         }
         UserDetails userDetails = userService.loadUserByUsername(authRequest.getLogin());
         String jwtToken = jwtService.generateToken(userDetails);

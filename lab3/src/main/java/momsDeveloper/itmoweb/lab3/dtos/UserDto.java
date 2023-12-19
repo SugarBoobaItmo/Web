@@ -1,4 +1,4 @@
-package momsDeveloper.itmoweb.dtos;
+package momsDeveloper.itmoweb.lab3.dtos;
 
 import org.springframework.lang.NonNull;
 
@@ -7,9 +7,9 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class JwtResponse {
+public class UserDto {
     @NonNull
-    private String token;
+    private Long id;
     @NonNull
     private String login;
 }
