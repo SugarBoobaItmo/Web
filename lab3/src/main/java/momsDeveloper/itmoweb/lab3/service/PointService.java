@@ -27,14 +27,26 @@ public class PointService {
         return points.stream().map((point) -> mapToPointDto(point)).toList();
     }
 
-    public PointDto mapToPointDto(Point point) {
-        return PointDto.builder().x(point.getX()).y(point.getY()).r(point.getR()).result(point.getResult())
-                .time(point.getTime()).executionTime(point.getExecutionTime()).owner(point.getOwner()).build();
+    public static PointDto mapToPointDto(Point point) {
+        return PointDto.builder()
+                .x(point.getX())
+                .y(point.getY())
+                .r(point.getR())
+                .result(point.getResult())
+                .time(point.getTime())
+                .executionTime(point.getExecutionTime())
+                .owner(UserService.mapToUserDto(point.getOwner()))
+                .build();
     }
 
-    public Point mapToPoint(PointDto pointDto) {
-        return Point.builder().x(pointDto.getX()).y(pointDto.getY()).r(pointDto.getR()).result(pointDto.getResult())
-                .time(pointDto.getTime()).executionTime(pointDto.getExecutionTime()).owner(pointDto.getOwner())
-                .build();
+    public static Point mapToPoint(PointDto pointDto) {
+        return new Point()
+                .withX(pointDto.getX())
+                .withY(pointDto.getY())
+                .withR(pointDto.getR())
+                .withResult(pointDto.getResult())
+                .withTime(pointDto.getTime())
+                .withExecutionTime(pointDto.getExecutionTime())
+                .withOwner(UserService.mapToUser(pointDto.getOwner()));
     }
 }

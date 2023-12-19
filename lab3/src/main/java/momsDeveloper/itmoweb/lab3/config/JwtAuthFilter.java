@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.stream.Collectors;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -32,7 +33,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String username = null;
         String jwtToken = null;
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            jwtToken = authHeader.substring(7);
+            jwtToken = authHeader.substring("Bearer ".length());
             try {
                 username = jwtProvider.getSubject(jwtToken);
             } catch (JWTVerificationException e) {
@@ -45,7 +46,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                     null,
                     jwtProvider.getAuthorities(jwtToken).stream().map(role -> new SimpleGrantedAuthority(role))
                             .collect(Collectors.toList()));
-            SecurityContextHolder.getContext().setAuthentication(authToken);
+            SecurityContextHolder.getContext().setAuthentication(authToken);                        
         }
         filterChain.doFilter(request, response);
     }

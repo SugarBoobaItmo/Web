@@ -40,10 +40,6 @@ public class AuthService {
     }
 
     public ResponseEntity<?> createNewUser(@RequestBody RegistrationUserDto registrationUser) {
-        if (!registrationUser.getPassword().equals(registrationUser.getConfirmPassword())) {
-            return new ResponseEntity<>(new AppError(HttpStatus.BAD_REQUEST.value(), "Passwords do not match"),
-                    HttpStatus.BAD_REQUEST);
-        }
         if (userService.getByLogin(registrationUser.getLogin()).isPresent()) {
             return new ResponseEntity<>(new AppError(HttpStatus.BAD_REQUEST.value(), "User already exists"),
                     HttpStatus.BAD_REQUEST);

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import momsDeveloper.itmoweb.lab3.dtos.RegistrationUserDto;
-import momsDeveloper.itmoweb.lab3.model.entity.Role;
+import momsDeveloper.itmoweb.lab3.dtos.UserDto;
 import momsDeveloper.itmoweb.lab3.model.entity.User;
 import momsDeveloper.itmoweb.lab3.repo.UserRepo;
 
@@ -45,11 +45,20 @@ public class UserService implements UserDetailsService {
     }
 
     public User createNewUser(RegistrationUserDto user) {
-        User newUser = new User();
-        newUser.setLogin(user.getLogin());
-        newUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        Role userRole = roleService.getUserRole();
-        newUser.setRoles(List.of(userRole));
+        var newUser = new User()
+                .withLogin(user.getLogin())
+                .withPassword(passwordEncoder.encode(user.getPassword()))
+                .withRoles(List.of(roleService.getUserRole()));
         return repository.save(newUser);
+    }
+
+    public static UserDto mapToUserDto(User user) {
+        return UserDto.builder().id(user.getId()).login(user.getLogin()).build();
+    }
+
+    public static User mapToUser(UserDto userDto) {
+        return new User()
+                .withId(userDto.getId())
+                .withLogin(userDto.getLogin());
     }
 }

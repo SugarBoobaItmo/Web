@@ -15,6 +15,6 @@ public class PointDto {
     private Boolean result;
     private String time;
     private String executionTime;
-    private String owner;
+    private UserDto owner;
 
 }

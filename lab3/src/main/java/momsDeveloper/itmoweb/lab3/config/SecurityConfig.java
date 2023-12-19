@@ -24,14 +24,16 @@ public class SecurityConfig extends WebSecurityConfiguration {
     private JwtAuthFilter filter;
 
     public SecurityConfig(UserService userService, JwtAuthFilter filter) {
-    this.userService = userService;
-    this.filter = filter;
+        this.userService = userService;
+        this.filter = filter;
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .cors(AbstractHttpConfigurer::disable).csrf(AbstractHttpConfigurer::disable)
+                .addFilterBefore(filter,
+                        UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/user/**").hasRole("USER")
@@ -39,9 +41,7 @@ public class SecurityConfig extends WebSecurityConfiguration {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint((request, response, authException) -> response
-                                .sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized")))
-                .addFilterBefore(filter,
-                        UsernamePasswordAuthenticationFilter.class);
+                                .sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized")));
         return http.build();
     }
 
@@ -62,5 +62,4 @@ public class SecurityConfig extends WebSecurityConfiguration {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
-
 }
