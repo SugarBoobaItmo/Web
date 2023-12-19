@@ -15,7 +15,9 @@ public interface PointRepo extends CrudRepository<Point, Long> {
 
     void save(Optional<Point> pointRes);
 
+    List<Point> searchByOwnerLogin(String username);
+
     void deleteAll();
 
-    List<Point> findAll();
+    void deleteById(Long id);
 }

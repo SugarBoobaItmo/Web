@@ -36,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfiguration {
                         UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/api/points/**").hasRole("USER")
                         .requestMatchers("/api/user/**").hasRole("USER")
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

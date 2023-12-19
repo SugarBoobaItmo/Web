@@ -8,27 +8,38 @@ import lombok.AllArgsConstructor;
 import momsDeveloper.itmoweb.lab3.dtos.PointDto;
 import momsDeveloper.itmoweb.lab3.model.entity.Point;
 import momsDeveloper.itmoweb.lab3.repo.PointRepo;
+import momsDeveloper.itmoweb.utils.SecurityUtil;
 
 @Service
 @AllArgsConstructor
 public class PointService {
     private PointRepo pointRepo;
 
+    public void deleteUserPoints() {
+        String username = SecurityUtil.getSessionUser();
+        List<Point> points = pointRepo.searchByOwnerLogin(username);
+        points.forEach((point) -> pointRepo.deleteById(point.getId()));
+    }
+
+    public void save(PointDto pointRes) {
+        String username = SecurityUtil.getSessionUser();
+        pointRes.getOwner().setLogin(username);
+        pointRepo.save(mapToPoint(pointRes));
+    }
+
     public void deleteAll() {
         pointRepo.deleteAll();
     }
 
-    public void save(PointDto pointRes) {
-        pointRepo.save(mapToPoint(pointRes));
-    }
-
     public List<PointDto> findAll() {
-        List<Point> points = pointRepo.findAll();
+        String username = SecurityUtil.getSessionUser();
+        List<Point> points = pointRepo.searchByOwnerLogin(username);
         return points.stream().map((point) -> mapToPointDto(point)).toList();
     }
 
     public static PointDto mapToPointDto(Point point) {
         return PointDto.builder()
+                .id(point.getId())
                 .x(point.getX())
                 .y(point.getY())
                 .r(point.getR())
