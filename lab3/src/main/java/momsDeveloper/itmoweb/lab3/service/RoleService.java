@@ -12,6 +12,6 @@ public class RoleService {
     private final RoleRepo roleRepo;
 
     public Role getUserRole() {
-        return roleRepo.findByName("ROLE_USER").get();
+        return roleRepo.findByName("USER").get();
     }
 }

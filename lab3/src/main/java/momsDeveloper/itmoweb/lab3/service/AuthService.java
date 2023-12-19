@@ -33,7 +33,8 @@ public class AuthService {
         }
         UserDetails userDetails = userService.loadUserByUsername(authRequest.getLogin());
         String jwtToken = jwtService.generateToken(userDetails);
-        return ResponseEntity.ok(new JwtResponse(jwtToken));
+        String login = userDetails.getUsername();
+        return ResponseEntity.ok(new JwtResponse(jwtToken, login));
     }
 
     public ResponseEntity<?> createNewUser(@RequestBody RegistrationUserDto registrationUser) {

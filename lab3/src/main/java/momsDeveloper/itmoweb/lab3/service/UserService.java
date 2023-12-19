@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import momsDeveloper.itmoweb.dtos.RegistrationUserDto;
+import momsDeveloper.itmoweb.lab3.model.entity.Role;
 import momsDeveloper.itmoweb.lab3.model.entity.User;
 import momsDeveloper.itmoweb.lab3.repo.UserRepo;
 
@@ -39,7 +40,7 @@ public class UserService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(
                 user.getLogin(),
                 user.getPassword(),
-                user.getRole().stream().map(role -> new SimpleGrantedAuthority(role.getName()))
+                user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName()))
                         .collect(Collectors.toList()));
     }
 
@@ -47,7 +48,8 @@ public class UserService implements UserDetailsService {
         User newUser = new User();
         newUser.setLogin(user.getLogin());
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        // newUser.setRole(List.of(roleService.getUserRole()));
+        Role userRole = roleService.getUserRole();
+        newUser.setRoles(List.of(userRole));
         return repository.save(newUser);
     }
 }

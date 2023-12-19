@@ -1,5 +1,6 @@
 package momsDeveloper.itmoweb.lab3.model.entity;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import jakarta.persistence.*;
@@ -23,9 +24,9 @@ public class User{
     @ManyToMany
     @JoinTable(
         name = "users_roles",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id")
+        joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+        inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
         )
-    private Collection<Role> role;
+    private Collection<Role> roles = new ArrayList<>();
     
 }
