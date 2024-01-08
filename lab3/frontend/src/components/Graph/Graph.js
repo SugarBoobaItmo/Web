@@ -78,24 +78,24 @@ const Graph = ({width}) => {
 
         // circle part
         ctx.moveTo(x_point, y_point);
-        ctx.arc(x_point, y_point, (width / 10), -4.7, -(4 * Math.PI) / 2, true);
+        ctx.arc(x_point, y_point, (width / 20),  -Math.PI, -4.7, true);
         ctx.fill();
 
         // triangle part
         ctx.moveTo(x_point, y_point);
-        ctx.lineTo(x_point - (width / 20), y_point);
-        ctx.lineTo(x_point, y_point - (width / 20));
+        ctx.lineTo(x_point + (width / 10), y_point);
+        ctx.lineTo(x_point, y_point + (width / 10));
         ctx.fill();
 
         // rectangle part
-        ctx.fillRect(x_point, y_point, (width / 20), -(width / 20) * 2);
+        ctx.fillRect(x_point, y_point, -(width / 20), -(width / 20) * 2);
 
         // paint black border for rectangle
         ctx.moveTo(x_point + (width / 20) * 2, y_point);
         ctx.lineTo(x_point, y_point);
         ctx.lineTo(x_point, y_point - (width / 20) * 2);
-        ctx.lineTo(x_point + (width / 20) , y_point - (width / 20) * 2);
-        ctx.lineTo(x_point + (width / 20) , y_point);
+        ctx.lineTo(x_point - (width / 20) , y_point - (width / 20) * 2);
+        ctx.lineTo(x_point - (width / 20) , y_point);
 
         ctx.strokeStyle = "black";
         ctx.stroke();
