@@ -36,15 +36,15 @@ public class SecurityConfig extends WebSecurityConfiguration {
                         UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/points/**").hasRole("USER")
-                        .requestMatchers("/api/user/**").hasRole("USER")
+                        .requestMatchers("/api/points/**").permitAll()
+                        .requestMatchers("/api/user/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint((request, response, authException) -> response
                                 .sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized")));
         return http.build();
-    }
+    } 
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {

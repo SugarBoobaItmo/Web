@@ -1,19 +1,27 @@
 package momsDeveloper.itmoweb.lab3.service;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import momsDeveloper.itmoweb.lab3.dtos.PointDto;
 import momsDeveloper.itmoweb.lab3.model.entity.Point;
+import momsDeveloper.itmoweb.lab3.model.entity.User;
 import momsDeveloper.itmoweb.lab3.repo.PointRepo;
+import momsDeveloper.itmoweb.lab3.repo.UserRepo;
+import momsDeveloper.itmoweb.utils.AreaValidator;
 import momsDeveloper.itmoweb.utils.SecurityUtil;
 
 @Service
 @AllArgsConstructor
 public class PointService {
     private PointRepo pointRepo;
+
+    private UserRepo userRepo;
 
     public void deleteUserPoints() {
         String username = SecurityUtil.getSessionUser();
@@ -23,7 +31,23 @@ public class PointService {
 
     public void save(PointDto pointRes) {
         String username = SecurityUtil.getSessionUser();
-        pointRes.getOwner().setLogin(username);
+        Optional<User> user = userRepo.getByLogin(username);
+        if (user.isEmpty()) {
+            throw new IllegalArgumentException("Cannot identify owner.");
+        }
+        pointRes.setOwner(UserService.mapToUserDto(user.get()));
+        
+        final long start = System.nanoTime();
+        pointRes.setTime(java.time.LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")));
+
+        var x = pointRes.getX();
+        var y = pointRes.getY();
+        var r = pointRes.getR();
+
+        var result = AreaValidator.checkArea(x, y, r);
+        pointRes.setResult(result);
+        pointRes.setExecutionTime(String.format("%.9f", (System.nanoTime() - start) / 1000000000.0));
+        
         pointRepo.save(mapToPoint(pointRes));
     }
 
