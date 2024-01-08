@@ -36,7 +36,7 @@ public class PointService {
             throw new IllegalArgumentException("Cannot identify owner.");
         }
         pointRes.setOwner(UserService.mapToUserDto(user.get()));
-        
+
         final long start = System.nanoTime();
         pointRes.setTime(java.time.LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")));
 
@@ -47,7 +47,7 @@ public class PointService {
         var result = AreaValidator.checkArea(x, y, r);
         pointRes.setResult(result);
         pointRes.setExecutionTime(String.format("%.9f", (System.nanoTime() - start) / 1000000000.0));
-        
+
         pointRepo.save(mapToPoint(pointRes));
     }
 
@@ -59,6 +59,24 @@ public class PointService {
         String username = SecurityUtil.getSessionUser();
         List<Point> points = pointRepo.searchByOwnerLogin(username);
         return points.stream().map((point) -> mapToPointDto(point)).toList();
+    }
+
+    public List<PointDto> changeArea(Double r) {
+        String username = SecurityUtil.getSessionUser();
+        List<Point> points = pointRepo.searchByOwnerLogin(username);
+        points.forEach((point) -> {
+            final long start = System.nanoTime();
+            var x = point.getX();
+            var y = point.getY();
+            point.setR(r);
+            var result = AreaValidator.checkArea(x, y, r);
+            point.setResult(result);
+            point.setTime(java.time.LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")));
+            point.setExecutionTime(String.format("%.9f", (System.nanoTime() - start) / 1000000000.0));
+        });
+        pointRepo.saveAll(points);
+        return points.stream().map((point) -> mapToPointDto(point)).toList();
+
     }
 
     public static PointDto mapToPointDto(Point point) {

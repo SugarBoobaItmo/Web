@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import momsDeveloper.itmoweb.lab3.dtos.PointDto;
 import momsDeveloper.itmoweb.lab3.exceptions.AppError;
 import momsDeveloper.itmoweb.lab3.service.PointService;
@@ -43,5 +44,16 @@ public class PointsController {
     public ResponseEntity<?> clearPoints() {
         pointService.deleteUserPoints();
         return new ResponseEntity<>(pointService.findAll(), HttpStatus.OK);
+    }
+
+    @PostMapping("/changeArea")
+    public ResponseEntity<?> changeArea(@RequestBody PointDto pointDto) {
+        try {
+            pointService.changeArea(pointDto.getR());
+            return new ResponseEntity<>(pointService.findAll(), HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(new AppError(HttpStatus.BAD_REQUEST.value(), e.getMessage()),
+                    HttpStatus.BAD_REQUEST);
+        }
     }
 }
