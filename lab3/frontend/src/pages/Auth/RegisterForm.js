@@ -19,13 +19,18 @@ const RegisterForm = () => {
 
     const handleRegister = async () => {
         const user = { username: getValues("username"), password: getValues("password") };
-        const userData = await UserService.register(user);
-        if (userData) {
-            if (userData.message) {
-                setError(userData.message);
-            } else {
-                navigate("/login");
+        try {
+            const userData = await UserService.register(user);
+            navigate("/login");
+        }
+        catch (error) {
+            if (error.response){
+                setError(error.response.data.message);
+            } else
+            {
+                setError("Something went wrong. Please try again later.");
             }
+            
         }
     }
 

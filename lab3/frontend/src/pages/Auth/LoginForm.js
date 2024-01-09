@@ -25,14 +25,17 @@ const LoginForm = () => {
             username: getValues("username"),
             password: getValues("password"),
         };
-        const userData = await UserService.login(user);
-        if (userData) {
-            if (userData.message) {
-                setError(userData.message);
+
+        try {
+            const userData = await UserService.login(user);
+            dispatch(setToken(userData.token));
+            dispatch(setUser(userData.login));
+            navigate("/points");
+        } catch (error) {
+            if (error.response) {
+                setError(error.response.data.message);
             } else {
-                dispatch(setToken(userData.token));
-                dispatch(setUser(userData.login));
-                navigate("/points");
+                setError("Something went wrong. Please try again later.");
             }
         }
     };
@@ -121,7 +124,9 @@ const LoginForm = () => {
                 </div>
                 {error && <p className="error">{error}</p>}
                 <button type="submit">Login</button>
-                <Link className={styles.link} to="/register">Register</Link>
+                <Link className={styles.link} to="/register">
+                    Register
+                </Link>
             </form>
         </div>
     );

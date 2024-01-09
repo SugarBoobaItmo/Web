@@ -2,7 +2,6 @@ import axios from "axios";
 
 export const UserService = {
     async login(user) {
-        try {
             const response = await axios.post(
                 "http://localhost:8080/api/auth/login",
                 {
@@ -11,14 +10,9 @@ export const UserService = {
                 }
             );
             return response.data;
-        } catch (error) {
-            // console.error(error);
-            return error.response.data;
-        }
     },
 
     async register(user) {
-        try {
             const response = await axios.post(
                 "http://localhost:8080/api/auth/register",
                 {
@@ -27,11 +21,6 @@ export const UserService = {
                 }
             );
             return response.data;
-        } catch (error) {
-            // console.error(error);
-            return error.response.data;
-
-        }
     },
 
     async validate(token) {
@@ -47,7 +36,6 @@ export const UserService = {
             );
             return true;
         } catch (error) {
-            // console.error(error);
             return false;
         }
     }
