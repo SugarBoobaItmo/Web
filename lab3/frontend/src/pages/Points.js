@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { setPoints, setR } from "../redux/pointsSlice";
 import { useState } from "react";
 import Graph from "../components/Graph/Graph";
+import { logout } from "../redux/authSlice";
 
 const Points = () => {
     const navigate = useNavigate();
@@ -76,6 +77,11 @@ const Points = () => {
             }
         }
 
+    };
+
+    const handleLogout = () => {
+        dispatch(logout());
+        navigate("/login");
     };
 
     return (
@@ -153,6 +159,7 @@ const Points = () => {
                 {error && <p>{error}</p>}
             </form>
             <button onClick={deletePoints}>Delete</button>
+            <button onClick={handleLogout}>Logout</button>
             <Graph width={600} />
             <PointsTable />
         </div>
