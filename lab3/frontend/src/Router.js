@@ -5,9 +5,10 @@ import NotFound from "./pages/NotFound";
 import RegisterForm from "./pages/Auth/RegisterForm";
 import Points from "./pages/Points";
 import { UserService } from "./services/userService";
+import { getToken } from "./token";
 
 setInterval(async () => {
-    const token = localStorage.getItem("token");
+    const token = getToken();
     if (window.location.href.indexOf("/points") != -1) {
         if (!(await UserService.validate(token))) {
             window.location.href = "/login";

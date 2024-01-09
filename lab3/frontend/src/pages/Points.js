@@ -10,6 +10,7 @@ import { useState } from "react";
 import Graph from "../components/Graph/Graph";
 import { logout } from "../redux/authSlice";
 import PointsForm from "../components/PointsForm/PointsForm";
+import { getToken } from "../token";
 
 const Points = () => {
     const navigate = useNavigate();
@@ -32,7 +33,7 @@ const Points = () => {
             time: 0,
             executionTime: 0,
         };
-        const pointData = await PointsService.addPoint(localStorage.getItem("token"), point);
+        const pointData = await PointsService.addPoint(getToken(), point);
 
         if (pointData) {
             if (pointData.message) {
@@ -44,22 +45,19 @@ const Points = () => {
     };
 
     const deletePoints = async () => {
-        const pointData = await PointsService.deletePoints(localStorage.getItem("token"));
+        const pointData = await PointsService.deletePoints(getToken());
         if (pointData) {
             if (pointData.message) {
                 setError(pointData.message);
             } else {
-                console.log(pointData);
-
                 dispatch(setPoints(pointData));
-                console.log(pointData);
             }
         }
     };
 
     const handleRChange = async (value) => {
         dispatch(setR(value));
-        const pointData = await PointsService.changeArea(localStorage.getItem("token"), value);
+        const pointData = await PointsService.changeArea(getToken(), value);
         if (pointData) {
             if (pointData.message) {
                 setError(pointData.message);

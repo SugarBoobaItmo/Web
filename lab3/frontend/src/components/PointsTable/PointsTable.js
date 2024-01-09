@@ -3,13 +3,14 @@ import { useSelector } from "react-redux";
 import { PointsService } from "../../services/pointsService";
 import { useDispatch } from "react-redux";
 import { setPoints } from "../../redux/pointsSlice";
+import { getToken } from "../../token";
 
 const PointsTable = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         const getPoints = async () => {
             const pointsData = await PointsService.getPoints(
-                localStorage.getItem("token")
+                getToken()
             );
             if (pointsData) {
                 if (!pointsData.message) dispatch(setPoints(pointsData));
