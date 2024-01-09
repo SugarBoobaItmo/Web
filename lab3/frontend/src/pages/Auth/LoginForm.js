@@ -101,27 +101,7 @@ const LoginForm = () => {
                     />
                     {errors.password && <p>{errors.password.message}</p>}
                 </div>
-                <div className={styles.form__input}>
-                    <label htmlFor="confirmPassword">Confirm Password</label>
-                    <input
-                        type="password"
-                        id="confirmPassword"
-                        {...register("confirmPassword", {
-                            required: "Password confirmation is required",
-                            validate: (value) => {
-                                if (value === getValues("password")) {
-                                    return true;
-                                } else {
-                                    return "Passwords do not match";
-                                }
-                            },
-                        })}
-                        onChange={handleFieldChange}
-                    />
-                    {errors.confirmPassword && (
-                        <p>{errors.confirmPassword.message}</p>
-                    )}
-                </div>
+                
                 {error && <p className="error">{error}</p>}
                 <button type="submit">Login</button>
                 <Link className={styles.link} to="/register">
