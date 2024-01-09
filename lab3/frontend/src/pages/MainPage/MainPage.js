@@ -2,16 +2,16 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-import { PointsService } from "../services/pointsService";
-import PointsTable from "../components/PointsTable/PointsTable";
+import { PointsService } from "../../services/pointsService";
+import PointsTable from "../../components/PointsTable/PointsTable";
 import { useDispatch } from "react-redux";
-import { setPoints, setR } from "../redux/pointsSlice";
+import { setPoints, setR } from "../../redux/pointsSlice";
 import { useState } from "react";
-import Graph from "../components/Graph/Graph";
-import { logout } from "../redux/authSlice";
-import PointsForm from "../components/PointsForm/PointsForm";
-import { getToken } from "../token";
-import Header from "../components/Header/Header";
+import Graph from "../../components/Graph/Graph";
+import { logout } from "../../redux/authSlice";
+import PointsForm from "../../components/PointsForm/PointsForm";
+import { getToken } from "../../token";
+import Header from "../../components/Header/Header";
 
 const Points = () => {
     const navigate = useNavigate();

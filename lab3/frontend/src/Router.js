@@ -3,9 +3,9 @@ import App from "./App";
 import LoginForm from "./pages/Auth/LoginForm";
 import NotFound from "./pages/NotFound";
 import RegisterForm from "./pages/Auth/RegisterForm";
-import Points from "./pages/Points";
 import { UserService } from "./services/userService";
 import { getToken } from "./token";
+import MainPage from "./pages/MainPage/MainPage";
 
 setInterval(async () => {
     const token = getToken();
@@ -24,7 +24,7 @@ const Router = () => {
                 <Route path="/login" element={<LoginForm />} />
                 <Route path="/" element={<LoginForm />} />
                 <Route path="/register" element={<RegisterForm />} />
-                <Route path="/points" element={<Points />} />
+                <Route path="/points" element={<MainPage />} />
             </Routes>
         </BrowserRouter>
     );
