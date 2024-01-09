@@ -21,8 +21,8 @@ const RegisterForm = () => {
         const user = { username: getValues("username"), password: getValues("password") };
         const userData = await UserService.register(user);
         if (userData) {
-            if (userData.error) {
-                setError(userData.error);
+            if (userData.message) {
+                setError(userData.message);
             } else {
                 navigate("/login");
             }
@@ -127,8 +127,8 @@ const RegisterForm = () => {
                     {errors.passwordConfirm && (
                         <p>{errors.passwordConfirm.message}</p>
                     )}
-                    {error && <p className="error">{error}</p>}
                 </div>
+                {error && <p className="error">{error}</p>}
 
                 <button type="submit">Register</button>
                 <Link className={styles.link} to="/login">Login</Link>

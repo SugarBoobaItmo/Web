@@ -12,7 +12,7 @@ export const UserService = {
             );
             return response.data;
         } catch (error) {
-            console.error(error);
+            // console.error(error);
             return error.response.data;
         }
     },
@@ -28,7 +28,7 @@ export const UserService = {
             );
             return response.data;
         } catch (error) {
-            console.error(error);
+            // console.error(error);
             return error.response.data;
 
         }
@@ -47,7 +47,7 @@ export const UserService = {
             );
             return true;
         } catch (error) {
-            console.error(error);
+            // console.error(error);
             return false;
         }
     }

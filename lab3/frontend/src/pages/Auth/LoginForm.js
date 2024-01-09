@@ -118,8 +118,8 @@ const LoginForm = () => {
                     {errors.confirmPassword && (
                         <p>{errors.confirmPassword.message}</p>
                     )}
-                    {error && <p className="error">{error}</p>}
                 </div>
+                {error && <p className="error">{error}</p>}
                 <button type="submit">Login</button>
                 <Link className={styles.link} to="/register">Register</Link>
             </form>
