@@ -39,7 +39,7 @@ const PointsTable = () => {
                             <td>{point.x}</td>
                             <td>{point.y}</td>
                             <td>{point.r}</td>
-                            <td>{point.result}</td>
+                            <td>{point.result ? "Ok" : "Not ok"}</td>
                             <td>{point.time}</td>
                             <td>{point.executionTime}</td>
                         </tr>
