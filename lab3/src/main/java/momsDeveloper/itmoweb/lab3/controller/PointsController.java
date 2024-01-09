@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import momsDeveloper.itmoweb.lab3.dtos.PointDto;
 import momsDeveloper.itmoweb.lab3.exceptions.AppError;
 import momsDeveloper.itmoweb.lab3.service.PointService;

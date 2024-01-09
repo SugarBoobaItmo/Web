@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import momsDeveloper.itmoweb.lab3.dtos.JwtRequest;
 import momsDeveloper.itmoweb.lab3.dtos.RegistrationUserDto;
 import momsDeveloper.itmoweb.lab3.service.AuthService;
+import momsDeveloper.itmoweb.utils.SecurityUtil;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -32,4 +34,14 @@ public class AuthController {
         return authService.createNewUser(registrationUser);
     }
 
+    @PostMapping("/validate")
+    public ResponseEntity<?> validate() {
+        String username = SecurityUtil.getSessionUser();
+        if (username == null) {
+            return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .body("User is not logged in.");
+        }
+        return ResponseEntity.ok().body(username);
+    }
 }

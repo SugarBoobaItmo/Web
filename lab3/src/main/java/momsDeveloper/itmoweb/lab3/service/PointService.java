@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import momsDeveloper.itmoweb.lab3.dtos.PointDto;
 import momsDeveloper.itmoweb.lab3.model.entity.Point;
 import momsDeveloper.itmoweb.lab3.model.entity.User;
