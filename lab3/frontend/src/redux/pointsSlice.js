@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     points: [],
-    };
+    r: 1,    
+};
 
 const pointsSlice = createSlice({
     name: 'points',
@@ -17,10 +18,13 @@ const pointsSlice = createSlice({
         deletePoints: (state) => {
             state.points = [];
         },
+        setR: (state, action) => {
+            state.r = action.payload;
+        },
     },
 });
 
-export const { setPoints, addPoint, deletePoints } = pointsSlice.actions;
+export const { setPoints, addPoint, deletePoints, setR } = pointsSlice.actions;
 
 export const selectPoints = (state) => state.points.points;
 

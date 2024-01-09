@@ -34,4 +34,21 @@ export const UserService = {
         }
     },
 
+    async validate(token) {
+        try {
+            const response = await axios.post(
+                "http://localhost:8080/api/auth/validate",
+                null,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            return true;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    }
 };

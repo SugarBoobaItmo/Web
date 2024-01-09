@@ -1,10 +1,13 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { store } from "../redux/store";
-import { selectToken } from "../redux/authSlice";
+
 import { PointsService } from "../services/pointsService";
+import PointsTable from "../components/PointsTable/PointsTable";
+import { useDispatch } from "react-redux";
+import { setPoints, setR } from "../redux/pointsSlice";
+import { useState } from "react";
+import Graph from "../components/Graph/Graph";
 
 const Points = () => {
     const navigate = useNavigate();
@@ -22,42 +25,57 @@ const Points = () => {
         setValue,
     } = useForm();
 
-    const token = useSelector(selectToken);
+    const [error, setError] = useState(null);
+
+    const dispatch = useDispatch();
+    
     const handlePoint = async () => {
         const point = {
             x: getValues("x")[0],
             y: getValues("y"),
             r: getValues("r")[0],
-
             result: true,
             time: 0,
             executionTime: 0,
         };
-        console.log(point);
-        const pointData = await PointsService.addPoint(token, point);
+        const pointData = await PointsService.addPoint(localStorage.getItem("token"), point);
 
         if (pointData) {
             if (pointData.message) {
-                console.log(pointData.message);
+                setError(pointData.message);
             } else {
-                console.log(pointData);
+                dispatch(setPoints(pointData));
             }
         }
     };
 
     const deletePoints = async () => {
-        const pointData = await PointsService.deletePoints(token);
+        const pointData = await PointsService.deletePoints(localStorage.getItem("token"));
         if (pointData) {
             if (pointData.message) {
-                console.log(pointData.message);
+                setError(pointData.message);
             } else {
-                console.log(pointData);
+                dispatch(setPoints(pointData));
             }
         }
     };
 
     const handleCheckboxChange = (name, value) => {
         setValue(name, value);
+    };
+
+    const handleRChange = async (value) => {
+        setValue("r", value);
+        dispatch(setR(value));
+        const pointData = await PointsService.changeArea(localStorage.getItem("token"), value);
+        if (pointData) {
+            if (pointData.message) {
+                setError(pointData.message);
+            } else {
+                dispatch(setPoints(pointData));
+            }
+        }
+
     };
 
     return (
@@ -123,7 +141,7 @@ const Points = () => {
                                     required: "r is required",
                                 })}
                                 onChange={() =>
-                                    handleCheckboxChange("r", value)
+                                    handleRChange(value)
                                 }
                             />
                             {value}
@@ -132,8 +150,11 @@ const Points = () => {
                 )}
                 <br />
                 <button type="submit">Add</button>
+                {error && <p>{error}</p>}
             </form>
             <button onClick={deletePoints}>Delete</button>
+            <Graph width={600} />
+            <PointsTable />
         </div>
     );
 };

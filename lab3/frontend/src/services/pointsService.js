@@ -4,7 +4,7 @@ export const PointsService = {
     async getPoints(token) {
         try {
             const response = await axios.get(
-                "http://localhost:8080/api/points",
+                "http://localhost:8080/api/points/all",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -48,6 +48,26 @@ export const PointsService = {
             const response = await axios.post(
                 `http://localhost:8080/api/points/delete`,
                 {},
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            return error.response.data;
+        }
+    },
+
+    async changeArea(token, r) {
+        try {
+            const response = await axios.post(
+                `http://localhost:8080/api/points/changeArea`,
+                {
+                    r: r,
+                },
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
