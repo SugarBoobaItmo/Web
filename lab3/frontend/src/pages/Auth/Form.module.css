@@ -1,0 +1,50 @@
+.form {
+    
+    max-width: 400px;
+    margin: 10% auto;
+    text-align: center;
+}
+
+.form h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.form__input {
+    
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form__input label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.form__input input {
+    /* fields  */
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+
+.error {
+    color: red;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+.link {
+    margin-top: 10px;
+    display: block;
+    text-decoration: none;
+    color: #2196f3;
+    font-size: 14px;
+}
+
+.link:hover {
+    color: #0b7dda;
+}

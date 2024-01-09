@@ -1,0 +1,28 @@
+.header {
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(113 103 103);
+    /* background-color: rgb(222 220 232); */
+    /* text-align: center; */
+    position: relative;
+}
+
+.header__info {
+    font-family: fantasy;
+    font-weight: normal;
+    font-size: 14px;
+    margin: 10px auto;
+    color: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+}
+
+.header__info p {
+    margin: 5px;
+}
+
+.logout__button {
+    position: absolute;
+    top: 1px; /* Adjust top position as needed */
+    right: 10px; /* Adjust right position as needed */
+    margin-top: 20px;
+}
+

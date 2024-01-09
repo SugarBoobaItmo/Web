@@ -4,6 +4,7 @@ import { PointsService } from "../../services/pointsService";
 import { useDispatch } from "react-redux";
 import { setPoints } from "../../redux/pointsSlice";
 import { getToken } from "../../token";
+import styles from "./PointsTable.module.css";
 
 const PointsTable = () => {
     const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const PointsTable = () => {
     const points = useSelector((state) => state.points.points);
 
     return (
-        <div className="points-table">
+        <div className={styles.table}>
             <table>
                 <thead>
                     <tr>

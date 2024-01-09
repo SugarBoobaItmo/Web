@@ -1,14 +1,21 @@
+// Header.js
+
+import React from "react";
+import styles from "./Header.module.css";
+
 import LogoutButton from "../Buttons/LogoutButton";
 
 const Header = () => {
     return (
-        <header className="header">
-            <div className="header__info">
+        <header className={styles.header}>
+            <div className={styles.header__info}>
                 <p>Хабнер Георгий Евгеньевич</p>
                 <p>P3231</p>
                 <p>Вариант 938472</p>
             </div>
-            <LogoutButton />
+            <div className={styles.logout__button}>
+                <LogoutButton />
+            </div>
         </header>
     );
 };

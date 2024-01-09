@@ -1,5 +1,8 @@
+// PointsForm.js
+
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import styles from "./PointsForm.module.css";
 
 const PointsForm = ({ onSubmit, onDelete, onRChange, error }) => {
     const {
@@ -30,9 +33,9 @@ const PointsForm = ({ onSubmit, onDelete, onRChange, error }) => {
     };
 
     return (
-        <div className="points-form">
-            <form onSubmit={handleSubmit(handlePoint)}>
-                <label htmlFor="x">X</label>
+        <div className={styles.form}>
+            <form >
+                <label className={styles.label} htmlFor="x">X</label>
                 {checkboxValues.x.map((value) => (
                     <label key={value}>
                         <input
@@ -43,14 +46,13 @@ const PointsForm = ({ onSubmit, onDelete, onRChange, error }) => {
                                 required: "x is required",
                             })}
                             onChange={() => handleCheckboxChange("x", value)}
+                            className={styles.checkbox}
                         />
                         {value}
                     </label>
                 ))}
                 <br />
-                {errors.x && <p>{errors.x.message}</p>}
-                <br />
-                <label htmlFor="y">Y</label>
+                <label className={styles.label} htmlFor="y">Y</label>
                 <input
                     type="text"
                     id="y"
@@ -66,15 +68,15 @@ const PointsForm = ({ onSubmit, onDelete, onRChange, error }) => {
                             message: "y must be less than 3",
                         },
                         pattern: {
-                            value: /^[-+]?[0-9]*\.?[0-9]+$/,
+                            value: /^[-+]?[0-9]*\.?[,0-9]+$/,
                             message: "y must be a number",
                         },
                     })}
-                    onChange={(e) => setValue("y", e.target.value)}
+                    onChange={(e) => setValue("y", e.target.value.replace(",", "."))}
+                    className={styles.inputText}
                 />
-                {errors.y && <p>{errors.y.message}</p>}
                 <br />
-                <label htmlFor="r">R</label>
+                <label className={styles.label} htmlFor="r">R</label>
                 {checkboxValues.r.map((value) => (
                     <label key={value}>
                         <input
@@ -85,15 +87,20 @@ const PointsForm = ({ onSubmit, onDelete, onRChange, error }) => {
                                 required: "r is required",
                             })}
                             onChange={() => handleRChange(value)}
+                            className={styles.checkbox}
                         />
                         {value}
                     </label>
                 ))}
-                <br />
-                <button type="submit">Add</button>
-                {error && <p>{error}</p>}
+                <div className={styles.buttonContainer}>
+                    <button type="submit" onClick={handleSubmit(handlePoint)} className={styles.button}>Add</button>
+                    <button className={styles.delete} onClick={onDelete}>Delete</button>
+                    {error && <p>{error}</p>}
+                    {errors.x && <p className={styles.error}>{errors.x.message}</p>}
+                    {errors.y && <p className={styles.error}>{errors.y.message}</p>}
+                    {errors.r && <p className={styles.error}>{errors.r.message}</p>}
+                </div>
             </form>
-            <button onClick={onDelete}>Delete</button>
         </div>
     );
 };

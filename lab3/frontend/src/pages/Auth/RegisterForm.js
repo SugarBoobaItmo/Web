@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { UserService } from "../../services/userService";
 import { Link, useNavigate } from "react-router-dom";
 import Clock from "../../components/Clock/Clock";
+import styles from "./Form.module.css";
 
 const RegisterForm = () => {
     const {
@@ -33,11 +34,11 @@ const RegisterForm = () => {
     };
 
     return (
-        <div className="reg-form">
+        <div className={styles.form}>
             <h1>Registration Form</h1>
             <Clock />
             <form onSubmit={handleSubmit(handleRegister)}>
-                <div className="reg-form__input">
+                <div className={styles.form__input}>
                     <label htmlFor="username">Username</label>
                     <input
                         type="text"
@@ -63,7 +64,7 @@ const RegisterForm = () => {
                     />
                     {errors.username && <p>{errors.username.message}</p>}
                 </div>
-                <div className="reg-form__input">
+                <div className={styles.form__input}>
                     <label htmlFor="password">Password</label>
                     <input
                         type="password"
@@ -90,7 +91,7 @@ const RegisterForm = () => {
                     {errors.password && <p>{errors.password.message}</p>}
                 </div>
 
-                <div className="reg-form__input">
+                <div className={styles.form__input}>
                     <label htmlFor="passwordConfirm">Confirm Password</label>
                     <input
                         type="password"
@@ -130,7 +131,7 @@ const RegisterForm = () => {
                 </div>
 
                 <button type="submit">Register</button>
-                <Link to="/login">Login</Link>
+                <Link className={styles.link} to="/login">Login</Link>
             </form>
         </div>
     );

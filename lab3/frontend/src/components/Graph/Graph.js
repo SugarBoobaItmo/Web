@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { setPoints } from "../../redux/pointsSlice";
 import { PointsService } from "../../services/pointsService";
 import { drawGraph } from "../../services/graphService";
+import styles from "./Graph.module.css";
 
 const Graph = ({width}) => {
     const canvasRef = useRef(null)
@@ -49,7 +50,7 @@ const Graph = ({width}) => {
 
     return (
         <div className="graph">
-            <canvas id="canvas" width={width} height={width} ref={canvasRef} onClick={handleCanvasClick}></canvas>
+            <canvas id="canvas" width={width} height={width} ref={canvasRef} onClick={handleCanvasClick} className={styles.graph__canvas}></canvas>
         </div>
     );
 };

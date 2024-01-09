@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken, setUser } from "../../redux/authSlice";
 import Clock from "../../components/Clock/Clock";
+import styles from "./Form.module.css";
 
 const LoginForm = () => {
     const {
@@ -41,11 +42,11 @@ const LoginForm = () => {
     };
 
     return (
-        <div className="reg-form">
+        <div className={styles.form}>
             <h1>Login Form</h1>
             <Clock />
             <form onSubmit={handleSubmit(handleLogin)}>
-                <div className="reg-form__input">
+                <div className={styles.form__input}>
                     <label htmlFor="username">Username</label>
                     <input
                         type="text"
@@ -71,7 +72,7 @@ const LoginForm = () => {
                     />
                     {errors.username && <p>{errors.username.message}</p>}
                 </div>
-                <div className="reg-form__input">
+                <div className={styles.form__input}>
                     <label htmlFor="password">Password</label>
                     <input
                         type="password"
@@ -97,7 +98,7 @@ const LoginForm = () => {
                     />
                     {errors.password && <p>{errors.password.message}</p>}
                 </div>
-                <div className="reg-form__input">
+                <div className={styles.form__input}>
                     <label htmlFor="confirmPassword">Confirm Password</label>
                     <input
                         type="password"
@@ -120,7 +121,7 @@ const LoginForm = () => {
                     {error && <p className="error">{error}</p>}
                 </div>
                 <button type="submit">Login</button>
-                <Link to="/register">Register</Link>
+                <Link className={styles.link} to="/register">Register</Link>
             </form>
         </div>
     );
