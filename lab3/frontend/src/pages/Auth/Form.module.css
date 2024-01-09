@@ -48,3 +48,22 @@
 .link:hover {
     color: #0b7dda;
 }
+
+@media (max-width: 1266px) {
+    .form {
+        margin: 20% auto;
+    }
+}
+
+@media (max-width: 723px) {
+    .form {
+        margin: 30% auto;
+    }
+}
+
+@media (max-width: 400px) {
+    .form {
+        margin: 30% auto;
+    }
+}
+
