@@ -4,6 +4,7 @@ import { UserService } from "../../services/userService";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken, setUser } from "../../redux/authSlice";
+import Clock from "../../components/Clock/Clock";
 
 const LoginForm = () => {
     const {
@@ -42,6 +43,7 @@ const LoginForm = () => {
     return (
         <div className="reg-form">
             <h1>Login Form</h1>
+            <Clock />
             <form onSubmit={handleSubmit(handleLogin)}>
                 <div className="reg-form__input">
                     <label htmlFor="username">Username</label>

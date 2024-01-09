@@ -11,6 +11,7 @@ import Graph from "../components/Graph/Graph";
 import { logout } from "../redux/authSlice";
 import PointsForm from "../components/PointsForm/PointsForm";
 import { getToken } from "../token";
+import Header from "../components/Header/Header";
 
 const Points = () => {
     const navigate = useNavigate();
@@ -68,15 +69,10 @@ const Points = () => {
 
     };
 
-    const handleLogout = () => {
-        dispatch(logout());
-        navigate("/login");
-    };
-
     return (
         <div>
+            <Header />
             <PointsForm onSubmit={handlePoint} onDelete={deletePoints} onRChange={handleRChange} error={error} />
-            <button onClick={handleLogout}>Logout</button>
             <Graph width={600} />
             <PointsTable />
         </div>

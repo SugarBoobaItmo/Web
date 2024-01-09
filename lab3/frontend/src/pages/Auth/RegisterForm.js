@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import React, { useState } from "react";
 import { UserService } from "../../services/userService";
 import { Link, useNavigate } from "react-router-dom";
+import Clock from "../../components/Clock/Clock";
 
 const RegisterForm = () => {
     const {
@@ -34,6 +35,7 @@ const RegisterForm = () => {
     return (
         <div className="reg-form">
             <h1>Registration Form</h1>
+            <Clock />
             <form onSubmit={handleSubmit(handleRegister)}>
                 <div className="reg-form__input">
                     <label htmlFor="username">Username</label>
