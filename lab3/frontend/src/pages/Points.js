@@ -9,6 +9,7 @@ import { setPoints, setR } from "../redux/pointsSlice";
 import { useState } from "react";
 import Graph from "../components/Graph/Graph";
 import { logout } from "../redux/authSlice";
+import PointsForm from "../components/PointsForm/PointsForm";
 
 const Points = () => {
     const navigate = useNavigate();
@@ -18,23 +19,15 @@ const Points = () => {
         }
     });
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        getValues,
-        setValue,
-    } = useForm();
-
     const [error, setError] = useState(null);
 
     const dispatch = useDispatch();
     
-    const handlePoint = async () => {
+    const handlePoint = async (x, y, r) => {
         const point = {
-            x: getValues("x")[0],
-            y: getValues("y"),
-            r: getValues("r")[0],
+            x: x,
+            y: y,
+            r: r,
             result: true,
             time: 0,
             executionTime: 0,
@@ -56,17 +49,15 @@ const Points = () => {
             if (pointData.message) {
                 setError(pointData.message);
             } else {
+                console.log(pointData);
+
                 dispatch(setPoints(pointData));
+                console.log(pointData);
             }
         }
     };
 
-    const handleCheckboxChange = (name, value) => {
-        setValue(name, value);
-    };
-
     const handleRChange = async (value) => {
-        setValue("r", value);
         dispatch(setR(value));
         const pointData = await PointsService.changeArea(localStorage.getItem("token"), value);
         if (pointData) {
@@ -86,79 +77,7 @@ const Points = () => {
 
     return (
         <div>
-            <h1>Points</h1>
-
-            <form onSubmit={handleSubmit(handlePoint)}>
-                <label htmlFor="x">X</label>
-                {["-4", "-3", "-2", "-1", "0", "1", "2", "3", "4"].map(
-                    (value) => (
-                        <label key={value}>
-                            <input
-                                type="checkbox"
-                                name="x"
-                                value={value}
-                                {...register("x", {
-                                    required: "x is required",
-                                })}
-                                onChange={() =>
-                                    handleCheckboxChange("x", value)
-                                }
-                            />
-                            {value}
-                        </label>
-                    )
-                )}
-                <br />
-                {errors.x && <p>{errors.x.message}</p>}
-                <br />
-                <label htmlFor="y">Y</label>
-                <input
-                    type="text"
-                    id="y"
-                    name="y"
-                    {...register("y", {
-                        required: "y is required",
-                        min: {
-                            value: -3,
-                            message: "y must be at least -3",
-                        },
-                        max: {
-                            value: 3,
-                            message: "y must be less than 3",
-                        },
-                        pattern: {
-                            value: /^[-+]?[0-9]*\.?[0-9]+$/,
-                            message: "y must be a number",
-                        },
-                    })}
-                    onChange={(e) => setValue("y", e.target.value)}
-                />
-                {errors.y && <p>{errors.y.message}</p>}
-                <br />
-                <label htmlFor="r">R</label>
-                {["-4", "-3", "-2", "-1", "0", "1", "2", "3", "4"].map(
-                    (value) => (
-                        <label key={value}>
-                            <input
-                                type="checkbox"
-                                name="r"
-                                value={value}
-                                {...register("r", {
-                                    required: "r is required",
-                                })}
-                                onChange={() =>
-                                    handleRChange(value)
-                                }
-                            />
-                            {value}
-                        </label>
-                    )
-                )}
-                <br />
-                <button type="submit">Add</button>
-                {error && <p>{error}</p>}
-            </form>
-            <button onClick={deletePoints}>Delete</button>
+            <PointsForm onSubmit={handlePoint} onDelete={deletePoints} onRChange={handleRChange} error={error} />
             <button onClick={handleLogout}>Logout</button>
             <Graph width={600} />
             <PointsTable />
